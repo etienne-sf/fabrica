@@ -1,0 +1,1 @@
+Le cœur ne contient aucune connaissance d'un domaine applicatif particulier ; les métamodèles (dont l'EA) sont des données d'entrée, jamais du code du cœur ; la dépendance va du projet vers le cœur, jamais l'inverse.
