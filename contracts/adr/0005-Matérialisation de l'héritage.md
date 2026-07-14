@@ -85,8 +85,8 @@ niveau** (« Class-Table Inheritance », le modèle qu'emploie ServiceNow) :
 - **La propagation à l'écriture est de la logique de mutation générée par le cœur, et doit
   être atomique.** Un chemin d'écriture qui oublierait un niveau produirait un enregistrement
   incohérent (présent au niveau spécialisé, absent au niveau mère). Cette orchestration
-  multi-tables est un **critère de premier plan pour le choix du moteur GraphQL** (ADR à
-  venir) : les moteurs auto-générés gèrent le moins naturellement l'écriture custom
+  multi-tables est un **critère de premier plan pour le choix du moteur GraphQL** (ADR-0011) : 
+  les moteurs auto-générés gèrent le moins naturellement l'écriture custom
   multi-tables — à peser explicitement contre Hasura / PostGraphile.
 - **L'identité partagée entre niveaux est l'invariant critique.** Même identifiant à chaque
   niveau, cohérence garantie (identité générée au niveau racine, clés étrangères entre

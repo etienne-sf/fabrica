@@ -91,8 +91,7 @@ connexion ne voient jamais le contexte l'une de l'autre ».
   vérifier selon le montage ; sinon la propagation s'effondre silencieusement.
 - **Compatibilité moteur.** Le `SET LOCAL` par transaction suppose que le moteur GraphQL ouvre
   une transaction par requête et laisse injecter ce préambule (Hasura via ses session
-  variables ; PostGraphile via `pgSettings`). Élément à confirmer au choix du moteur (ADR à
-  venir).
+  variables ; PostGraphile via `pgSettings`). Élément à confirmer au choix du moteur (ADR-0011).
 
 ## Alternatives écartées
 

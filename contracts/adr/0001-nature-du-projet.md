@@ -3,7 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 
 ### Contexte
-Le projet a démarré comme banc d'essai du développement assisté par IA, en prenant un référentiel d'architecture d'entreprise (EA) comme cas d'usage bien maîtrisé. Au fil de la conception, l'objectif a évolué : le cœur (métamodèle + outils de génération) est destiné à être réutilisé par plusieurs projets successifs, le référentiel EA n'étant que le premier. Cette évolution change le niveau d'exigence et devait être actée explicitement, car elle métait restée ambiguë (« banc d'essai vs produit »).
+Le projet a démarré comme banc d'essai du développement assisté par IA, en prenant un référentiel d'architecture d'entreprise (EA) comme cas d'usage bien maîtrisé. Au fil de la conception, l'objectif a évolué : le cœur (métamodèle + outils de génération) est destiné à être réutilisé par plusieurs projets successifs, le référentiel EA n'étant que le premier. Cette évolution change le niveau d'exigence et devait être actée explicitement, car elle était restée ambiguë (« banc d'essai vs produit »).
 
 ### Décision
 Fabrica est un **produit-socle réutilisable** : un moteur générique piloté par métamodèle,

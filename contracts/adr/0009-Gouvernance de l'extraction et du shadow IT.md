@@ -4,11 +4,6 @@
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Configurable par
 criticité du projet-client. À éclater en `contracts/adr/0009-gouvernance-extraction.md`.
 
-> **Numérotation indicative.** Cet ADR suppose l'existence d'un ADR « L'API est la frontière
-> de sécurité ; le front-end ne fournit aucune sécurité » (issu de la même discussion, à
-> rédiger — pressenti ADR-0008). Le présent ADR en est le prolongement côté *usage aval*.
-> Numérotation à réconcilier.
-
 ---
 
 ## Contexte

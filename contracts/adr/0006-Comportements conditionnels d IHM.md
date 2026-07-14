@@ -5,10 +5,6 @@
 Concerne les comportements d'interface conditionnels d'un formulaire. À éclater en
 `contracts/adr/0006-effets-ihm-declaratifs.md`.
 
-> Numérotation indicative : deux ADR discutés antérieurement restent à rédiger (choix du
-> moteur GraphQL ; isolation des projets-clients vis-à-vis du moteur). La numérotation
-> définitive sera réconciliée à leur écriture.
-
 ---
 
 ## Contexte
