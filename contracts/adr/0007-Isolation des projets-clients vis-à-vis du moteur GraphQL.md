@@ -5,6 +5,11 @@
 dont le choix de moteur (ADR à venir) n'est qu'une application. À éclater en
 `contracts/adr/0007-isolation-projets-moteur.md`.
 
+> **Réconciliation (post-ADR-0011).** Cet ADR ne nomme aucun moteur : l'isolation est
+> précisément ce qui rend le moteur indifférent. Le moteur d'exécution effectivement retenu
+> est décidé en ADR-0011 (Grafast ; schéma GraphQL produit par Fabrica). L'ADR-0011 **clôt
+> par construction** la crainte de « surface de sortie » ci-dessous.
+>
 > Numérotation indicative : dans l'ordre logique, cet ADR **précède** l'ADR de choix du moteur
 > GraphQL, car il est le principe-parent qui rend ce choix réversible. Numérotation à
 > réconcilier.
@@ -15,7 +20,7 @@ dont le choix de moteur (ADR à venir) n'est qu'une application. À éclater en
 
 Fabrica est un produit-socle réutilisé par plusieurs projets-clients successifs, développés
 par des personnes différentes (cf. constitution, « Contrat public du cœur »). Le moteur
-GraphQL retenu (PostGraphile, ADR à venir) est susceptible de changer un jour. Le risque à
+d'exécution retenu (cf. ADR-0011) est susceptible de changer un jour. Le risque à
 neutraliser : qu'un changement de moteur **impacte les projets-clients**, les obligeant à
 retoucher leur code — ce qui ruinerait la pérennité du socle.
 
@@ -40,17 +45,20 @@ neutre de Fabrica. C'est **Fabrica** qui traduit cette déclaration vers le méc
 courant. Un projet ne écrit jamais une fonction ni un plugin propre au moteur. Cette surface
 est neutre par construction.
 
-**2. Surface de sortie — l'API générée.** Ce qu'un projet *consomme* (l'API GraphQL que
-Fabrica produit) doit être une **forme définie par Fabrica**, pas la sortie brute du moteur.
-C'est le point le plus subtil et le plus facile à rater : un moteur impose ses propres
-conventions (nommage, forme des mutations, types de connexion/pagination, identifiants de
-nœud, format d'erreurs). Si l'IHM et les consommateurs d'un projet sont écrits contre ces
-conventions *brutes*, changer de moteur casse le projet — l'isolation a fui par la sortie,
-même si l'entrée était neutre. Donc : **la forme de l'API que les projets consomment fait
-partie du contrat public de Fabrica ; les conventions spécifiques au moteur ne doivent pas s'y
-manifester.** Selon le moteur, cela suppose soit d'adopter et documenter des conventions
-stables imposées par Fabrica, soit une couche de normalisation qui masque les particularités
-du moteur (choix d'implémentation, non tranché ici).
+**2. Surface de sortie — l'API générée.** Ce qu'un projet *consomme* (l'API GraphQL) doit
+être une **forme définie par Fabrica**, pas la sortie brute d'un générateur de moteur. Le
+risque : qu'un moteur impose ses conventions (nommage, forme des mutations, pagination,
+identifiants de nœud, format d'erreurs) et que les consommateurs d'un projet s'y couplent, si
+bien qu'un changement de moteur casse le projet — l'isolation aurait fui par la sortie, même
+avec une entrée neutre. **Donc : la forme de l'API que les projets consomment fait partie du
+contrat public de Fabrica ; aucune convention de moteur ne doit s'y manifester.**
+
+> **Résolu par l'ADR-0011.** Ce risque était réel *tant qu'un générateur de moteur produisait
+> le schéma public*. L'ADR-0011 le **clôt par construction** : Fabrica génère elle-même le
+> schéma GraphQL public à partir du métamodèle (option C), et l'exécution seule est confiée à
+> Grafast. Aucun générateur de moteur ne façonnant le schéma, aucune convention de moteur ne
+> peut fuir dans la sortie. La surface de sortie n'est donc plus un point de vigilance ouvert,
+> mais une propriété acquise.
 
 ## Deux natures de custom (rappel structurant)
 
@@ -93,8 +101,9 @@ l'ADR ouvrant le runtime devra satisfaire ; elle n'est pas construite maintenant
 ## Conséquences
 
 - **Fabrica absorbe le risque de changement de moteur, pas les projets.** Un changement de
-  moteur = réécriture de la couche de traduction (entrée) et de normalisation (sortie) *dans
-  Fabrica*, une fois, par le fournisseur du socle. C'est la valeur même d'un produit-socle :
+  moteur = réécriture de la couche d'exécution *dans Fabrica*, une fois, par le fournisseur du
+  socle. La forme de l'API (sortie), produite par Fabrica (ADR-0011), ne bouge pas lors d'un
+  changement d'exécuteur. C'est la valeur même d'un produit-socle :
   concentrer le risque là où le fournisseur peut l'absorber, pour l'ôter des clients.
 - **Le choix de moteur devient réversible** (donc peu risqué) : c'est cet ADR qui le rend tel.
   L'ADR de choix du moteur en devient un détail d'implémentation, pas un engagement structurant
@@ -102,11 +111,10 @@ l'ADR ouvrant le runtime devra satisfaire ; elle n'est pas construite maintenant
 - **La forme de l'API fait partie du contrat versionné** de Fabrica (cf. constitution,
   compatibilité ascendante) : elle évolue en versions non-cassantes pour les clients,
   indépendamment du moteur sous-jacent.
-- **Limite honnête :** l'isolation n'est jamais gratuite sur la surface de sortie. Elle
-  n'est aussi solide que la discipline à empêcher les conventions du moteur de fuir dans l'API
-  consommée. Une fuite non détectée (un projet qui se met à dépendre d'une particularité
-  PostGraphile dans la forme de l'API) réintroduit silencieusement le couplage. Cette
-  non-fuite mérite d'être vérifiée (test/revue), pas supposée.
+- **Surface de sortie — acquise depuis l'ADR-0011.** La crainte initiale (des conventions de
+  moteur fuyant dans l'API consommée) est levée par construction : Fabrica produit le schéma
+  public, aucun générateur de moteur ne le façonne. Le couplage résiduel à l'exécuteur
+  (Grafast) est **interne à Fabrica**, jamais exposé aux projets (cf. ADR-0011).
 - Le futur runtime de règles héritera de cette contrainte d'hébergement par Fabrica (ci-dessus).
 
 ## Parallèle avec le Principe IV
