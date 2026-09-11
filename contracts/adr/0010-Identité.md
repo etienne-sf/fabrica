@@ -42,6 +42,27 @@ rôles/profils »**. Ce que le jeton transporte est un contrat à décider tôt 
 mappers* côté émetteur), car c'est lui qui relie « qui est connecté » à ce que la base pourra
 lire.
 
+## Décision — capacité d'authentification locale de secours (break glass)
+
+Indépendamment de la source d'identité courante (provisoire, Keycloak, ou BFF), Fabrica
+conserve **toujours** une **capacité d'authentification locale de dernier recours**, réservée
+au *break glass* (cf. ADR-0012, garantie d'administration) :
+
+- Elle permet de se connecter **même quand la source d'identité externe est indisponible**
+  (Keycloak en panne) ou quand l'accès normal est perdu (lockout admin). C'est le pendant, côté
+  authentification, de la « récupération inconditionnelle » de l'ADR-0012 : sans elle, un
+  Keycloak KO + un lockout = plateforme irrécupérable même par la base.
+- C'est un **contournement de la source externe**, donc une **surface de sécurité** : elle est
+  **scellée** (identifiants en coffre-fort, procédure documentée), **désactivée en usage
+  normal**, et **tout usage est audité comme événement majeur**.
+- Elle est le point d'entrée du compte de secours que la procédure de récupération (ADR-0012 →
+  ADR données système) insère : insérer un utilisateur local ne suffit à le faire *se connecter*
+  que si ce mode local existe — l'authentification n'étant plus, sinon, en base mais chez la
+  source externe.
+
+Cette capacité est **calée dès le départ** (voir plus bas) : elle ne peut pas être rétro-ajoutée
+sans risque, puisque c'est précisément en situation de panne qu'on en a besoin.
+
 ## Décision — propagation jusqu'à la session PostgreSQL
 
 Malgré le pool de connexions mutualisé, l'identité vérifiée descend jusqu'à la base par le
@@ -71,6 +92,7 @@ Propriétés clés :
 - l'**indirection de lecture** : jamais de tables nues ; lecture via vue/fonction dont le
   prédicat d'autorisation est aujourd'hui `TRUE`, prêt à recevoir une condition ;
 - la **distinction des identités humain / compte de service** (prérequis de l'ADR-0009).
+- la **capacité d'authentification locale de secours** (break glass), scellée et auditée.
 
 **Réservé, inerte au démarrage** (Principe VII) :
 - la **RLS** en lecture (le prédicat reste `TRUE` tant que la visibilité différenciée n'est
@@ -91,7 +113,8 @@ connexion ne voient jamais le contexte l'une de l'autre ».
   vérifier selon le montage ; sinon la propagation s'effondre silencieusement.
 - **Compatibilité moteur.** Le `SET LOCAL` par transaction suppose que le moteur GraphQL ouvre
   une transaction par requête et laisse injecter ce préambule (Hasura via ses session
-  variables ; PostGraphile via `pgSettings`). Élément à confirmer au choix du moteur (ADR-0011).
+  variables ; PostGraphile via `pgSettings`). Élément à confirmer au choix du moteur (ADR à
+  venir).
 
 ## Alternatives écartées
 
