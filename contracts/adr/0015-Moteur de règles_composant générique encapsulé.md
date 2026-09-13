@@ -2,7 +2,7 @@
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Composant utilisé par le
-moteur des effets (ADR-0016). À éclater en `contracts/adr/0017-moteur-de-regles.md`.
+moteur des effets (ADR-0016). À éclater en `contracts/adr/0015-moteur-de-regles.md`.
 
 ---
 
@@ -22,7 +22,7 @@ Le moteur de règles est :
   le point fixe (portés par le moteur des effets). Il pourrait servir à autre chose ;
 - **sans état et sans effet** : il fait **une passe** — il n'écrit rien, ne boucle pas ;
 - **encapsulé et remplaçable** : Fabrica ne dépend de lui que par un **contrat mince** ; on peut en
-  changer sans toucher au moteur des effets. Même principe d'isolation que Grafast (ADR-0011, ADR-0007
+  changer sans toucher au moteur des effets. Même principe d'isolation que Grafast (ADR-0011 ; ADR-0007
   appliqué à un composant tiers).
 
 ## Contrat attendu (le contrat mince)
