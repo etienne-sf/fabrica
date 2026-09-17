@@ -1,4 +1,4 @@
-# ADR-0006 — Effets multi-canaux sur les données : catalogue et régimes d'application
+# ADR-0006 — Effets multi-canaux : catalogue et régimes d'application
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV).
@@ -100,6 +100,22 @@ cohérence des données, pas un privilège). À distinguer de l'autorisation (AD
   transitoires). Propriété induite par « le moteur produit, les effets consomment » — à préserver
   (ne jamais livrer d'états intermédiaires aux effets).
 
+## Conditionnement des listes de valeurs
+
+Le conditionnement d'une liste par un autre attribut est **déclaré** dans la définition de la liste
+(ADR-0018) et **appliqué ici** :
+- Le filtrage des valeurs proposées selon la valeur conditionnante est un effet, décliné multi-canal
+  comme les autres (formulaire : liste filtrée ; régime donnée : valeur hors-domaine refusée).
+- **Quand la valeur conditionnante change et rend la sélection incompatible, l'effet `vider` est
+  déclenché sur l'attribut conditionné.** Politique retenue : **vider** (plutôt qu'interdire le
+  changement ou seulement signaler) — seule option qui garantit qu'aucune valeur incompatible n'est
+  enregistrée *sans* bloquer l'utilisateur. Prix assumé : la valeur est perdue si le changement
+  conditionnant était une fausse manœuvre.
+- `vider` étant un effet **qui modifie une donnée**, il **relance l'évaluation** (ADR-0016). D'où le
+  **traitement récursif** des chaînes de conditionnement (A→B→C) : vider B peut rendre C incompatible,
+  qui est vidé à son tour, jusqu'au point fixe. La récursivité n'est pas un mécanisme ajouté — c'est
+  l'itération du moteur des effets appliquée aux dépendances de listes.
+
 ## Extensibilité
 
 Catalogue **fermé, extensible par Fabrica**. Critère d'admission : le comportement de l'effet est
@@ -128,4 +144,5 @@ défini **pour les deux régimes** (vérification + projection formulaire). Dém
 - **Points d'entrée / scripts** (ADR à venir) : déclenchement par script.
 - **Traduction / i18n** (ADR à venir) : messages = clés + placeholders, jamais de texte en dur.
 - **Sources de données / ingestion** (ADR à venir) : canal en régime vérification.
+- **Listes de valeurs** (ADR-0018) : déclarent le conditionnement, appliqué ici via l'effet `vider` récursif.
 - **Règles d'intégrité** (ADR à venir) : frontière intégrité/autorisation.
