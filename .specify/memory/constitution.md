@@ -33,14 +33,6 @@ Corrections apportées au brouillon:
   - Contrôle de conformité : ajout d'une vérification explicite du Principe IV (le cœur ne
     nomme aucun concept de domaine).
 
-Clarifications ultérieures (avant commit, toujours en ratification 1.0.0):
-  - Principe IV : précisé que la prohibition de nommer un concept de domaine vise le CODE du
-    cœur, non le métamodèle-donnée (un métamodèle EA hébergé pour le banc nomme légitimement
-    ses concepts).
-  - Portée › banc de validation : distinction explicite des deux usages de l'EA — (a) le
-    métamodèle EA comme donnée d'entrée du banc dans le dépôt du cœur, (b) le produit EA de
-    production comme projet-client dans un dépôt distinct.
-
 Sections retirées: aucune.
 
 Modèles à vérifier:
@@ -117,10 +109,7 @@ deux.
 contient aucune connaissance d'un domaine applicatif particulier — les métamodèles sont des
 **données d'entrée**, jamais du code du cœur. Aucun fichier du cœur ne DOIT nommer un concept
 de domaine (p. ex. « application », « capacité », « chaîne de valeur ») : un tel nom est une
-fuite à corriger. Cette prohibition vise le **code** du cœur (`src/`, `ui/`, générateurs et
-tout artefact régénérable), NON le métamodèle-donnée : un métamodèle EA hébergé dans le dépôt
-pour le banc de validation nomme légitimement ses concepts, car il est *entrée*, pas cœur. Le
-métamodèle transverse (`contracts/metamodele.md`) prime sur les vues
+fuite à corriger. Le métamodèle transverse (`contracts/metamodele.md`) prime sur les vues
 locales de feature ; il pilote la génération du `schema.graphql` et des contraintes de base.
 Toute génération DOIT satisfaire `contracts/schema.graphql` à l'identique. Rationale : sans
 ce sens de dépendance imposé, on recrée deux sources de vérité et le fonctionnel devient
@@ -226,6 +215,19 @@ plateforme, consommée par des projets-clients successifs. À ce titre :
 Ces disciplines ne s'activent pleinement qu'à partir de la bascule décrite en Portée ; avant
 elle, le cœur est un spike régénérable.
 
+## Sécurité de l'information (DICT)
+
+Fabrica garantit les propriétés de sécurité de l'information — **Disponibilité, Intégrité,
+Confidentialité, Traçabilité** (DICT). Elle **ne vise pas le niveau maximal partout**, mais
+**fournit les mécanismes** permettant à chaque projet d'atteindre le niveau requis sur chaque
+critère, et **rend l'implémentation mesurable** : on doit pouvoir vérifier quels mécanismes de
+sécurité sont effectivement en place (p. ex. si un niveau de confidentialité élevé exige une
+donnée chiffrée ou des droits particuliers, le constater et le monitorer). **L'intégrité des
+données est une mission fondatrice** du cœur.
+
+Le détail (mécanismes par critère, mesure de conformité, chiffrement) relève d'ADR dédiés ; ce
+principe fixe le cadre et l'exigence de mesurabilité, pas leur mise en œuvre.
+
 ## Governance
 
 Cette constitution prime sur toute autre pratique. En cas de conflit entre un artefact
@@ -249,12 +251,8 @@ public du cœur et compatibilité ascendante »). Cette bascule est un **événe
 observable** : la naissance d'un second dépôt, celui du référentiel EA de production, qui
 *importe* le cœur versionné au lieu de le contenir.
 
-**Portée — banc de validation, décision et risque assumé.** Deux usages distincts de l'EA
-coexistent et NE DOIVENT PAS être confondus : (a) le **métamodèle EA**, *donnée d'entrée* du
-banc de validation, hébergé dans le dépôt du cœur ; (b) le **produit EA de production**, futur
-projet-client qui vivra dans un dépôt distinct et *importera* le cœur versionné (cf. la bascule
-ci-dessus). Le banc de test intégré au dépôt du cœur est fondé sur le **métamodèle EA réel**
-(et non sur un métamodèle-jouet dédié).
+**Portée — banc de validation, décision et risque assumé.** Le banc de test intégré au
+dépôt du cœur est fondé sur le **métamodèle EA réel** (et non sur un métamodèle-jouet dédié).
 Conséquence explicitement acceptée : la généricité du cœur n'est pas prouvée par un second
 métamodèle dissemblable ; une hypothèse spécifique à l'EA pourrait remonter dans le cœur sans
 être détectée par le seul banc EA. Ce risque est jugé acceptable au regard du coût d'un
