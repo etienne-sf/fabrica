@@ -190,6 +190,10 @@ zone protégée : STOP, signaler comme décision humaine, ne pas le faire.
   confort contournable et absent pour un connecteur ; le serveur ne fait jamais confiance à
   un contrôle amont. Une définition de règle, deux moteurs d'exécution (défense en
   profondeur), zéro logique dupliquée.
+- **Pas de dénormalisation par défaut.** La forme **normalisée** est le défaut ; la
+  dénormalisation est une **optimisation locale justifiée par une mesure**, jamais par
+  anticipation. On ne réfléchit à dénormaliser qu'**après avoir constaté** un problème de
+  performance sur un cas précis (application de « ne pas sur-concevoir » au domaine des perfs).
 - **Autorisation d'écriture par (entité, attribut)**, imposée à la frontière de mutation sur
   les seuls attributs réellement modifiés (comparaison entrant/existant). `ecriture: systeme`
   et `ecriture: <profil>` sont deux natures distinctes, pas deux valeurs d'un même champ.

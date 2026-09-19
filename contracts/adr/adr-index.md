@@ -27,7 +27,8 @@
 - **0008** (P) L'API est la frontière de sécurité ; friction raisonnable contre le shadow IT (BFF différé).
 - **0009** (D) Gouvernance de l'extraction / shadow IT.
 - **0010** (P) Identité : frontière unique, propagation SET LOCAL, auth locale de secours.
-- **0012** (P) Modèle d'autorisation : rôles, ACL, groupes, administration.
+- **0012** (P) Modèle d'autorisation : QUI-utilisateur, quadruplet ACL, rôles, groupes, administration.
+- **0026** (P) Autorisation par ligne (RLS) : axes de gouvernance, accroche, conditions.
 
 ## Règles, effets, comportements
 - **0003** (P) Contrat d'IHM piloté par le métamodèle (formulaires/listes).
@@ -47,7 +48,7 @@
 
 ## Numéros
 - **0015** a d'abord porté « effets multi-canaux », déplacé vers **0006** ; réattribué au moteur de règles.
-- Pas de trou ; **0026** est le prochain libre.
+- Pas de trou ; **0027** est le prochain libre.
 
 ## Catalogues (contracts/catalogues/)
 Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** (ADR-0025), **catalogue-effets.md** (ADR-0006), **catalogue-natures-acl.md** (ADR-0012), **catalogue-canaux.md** (ADR-0006). Motif : constitution § Catalogues.
@@ -55,7 +56,6 @@ Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** 
 ## Dettes — ADR à écrire (référencés, non rédigés)
 **Structurants / prioritaires :**
 - **Points d'entrée / scripts** (confluent — à traiter en dernier).
-- **Axe ligne / RLS** (commentaires, délégation, rattachement utilisateur↔ligne ; raccorde 0010).
 
 **Autres :**
 - Observabilité de la sécurité / conformité (mesurer le niveau DICT effectivement atteint).

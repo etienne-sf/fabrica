@@ -25,6 +25,43 @@ L'autorisation se compose de **deux axes** :
 **Invariant de conjonction :** le droit effectif sur une donnée = **conjonction** de l'axe
 structurel ET de l'axe ligne — jamais l'union. L'axe ligne ne peut que *restreindre*.
 
+## Le QUI, les rôles, et la forme d'une ACL (clarification)
+
+- **Le QUI d'une action = l'utilisateur** (humain ou technique) qui l'effectue. **Jamais le
+  rôle.** L'utilisateur est le sujet ; c'est lui qu'on trace (`sys_updated_by`, ADR-0020) et sur
+  lui que porte l'intersection d'impersonation. Les **rôles sont le *mécanisme de résolution*** de
+  ses droits, pas le sujet.
+- **Rôles effectifs d'un utilisateur = (rôles de ses groupes) ∪ (rôles affectés directement).**
+  Un rôle arrive par deux chemins — via un groupe, ou directement (ADR-0012 « un rôle s'affecte à
+  un utilisateur *ou* à un groupe ») — et les deux sources s'unissent au niveau des rôles.
+- **Une ACL est un quadruplet : (rôle, opération, cible, condition).** Le **rôle** en est le
+  *porteur du droit* (pas le QUI). Une ACL dit « ce rôle accorde ce droit » ; l'utilisateur en
+  hérite s'il possède ce rôle.
+  - **opération** : `lire | écrire | supprimer` (échelle). **Pas d'opération « filtrer »** :
+    filtrer/trier **découle de lire** (on ne peut filtrer que ce qu'on peut lire). Une définition
+    (rapport, vue, filtre) qui violerait ce droit est détectée **au plus tôt**, et à défaut
+    **refusée à l'exécution** avec une erreur claire. *(À la différence des modèles où le contrôle
+    d'attribut agit en bout de chaîne sur l'affichage — laissant filtrer avant de masquer, d'où
+    l'inférence par requête — le contrôle est ici en base, à la source : filtrer sur un attribut
+    non lisible est refusé, pas exécuté puis masqué.)*
+  - **cible** : entité, attribut, ou **ligne** (via condition — axe ligne).
+  - **condition** : optionnelle, fondée sur un **axe de gouvernance** (utilisateur, groupe).
+
+## Résolution des droits (ciblée, une fois par requête)
+
+- **Ciblée sur l'accès demandé** : on ne charge **que les ACL pertinentes** (rôles effectifs de
+  l'utilisateur × cible × opération), jamais l'ensemble. C'est ce qui évite l'explosion de volume
+  (les ACL étant **déclaratives, sans script** — cf. limite dure — elles s'indexent et se filtrent
+  par (rôle, cible, opération)).
+- **Une fois par requête** : la chaîne utilisateur → rôles effectifs → conditions est résolue une
+  seule fois et **déposée dans le contexte de session** (avec `app.user_id`, ADR-0010), consommable
+  par tous les prédicats.
+- **Requêtes multi-entités** : la composition des droits sur une requête qui traverse plusieurs
+  entités est assurée par l'**application des prédicats RLS table par table dans le plan SQL** (pas
+  par une orchestration applicative) — un avantage structurel du contrôle en base. Point de
+  vigilance : ce qu'on dépose en session doit rester borné (un utilisateur à très nombreux groupes
+  peut alourdir la résolution).
+
 ## Modèle additif pur
 
 - **À l'intérieur d'un axe, les ACL s'additionnent** : le droit effectif est l'**union** des
@@ -111,7 +148,7 @@ leurs propres déclinaisons ordonnées si pertinent.)*
 - **Cas standard** : un membre est **marqué gestionnaire** (attribut sur l'appartenance). Étant
   membre, il a déjà les droits du groupe → **aucune élévation possible par construction**. Il
   ajoute/retire des membres, et **ajoute/retire des gestionnaires (symétrique)** — auto-propagation
-  assumée, au service de l'autonomie des équipes.
+  assumée, au service de l'autonomie des groupes.
 - **Cas séparation des pouvoirs** : un groupe peut être **sans gestionnaire interne** ; un
   **autre groupe** porte le droit d'administrer ses appartenances. Le gestionnaire n'est alors
   pas membre et ne bénéficie pas des droits → *gérer* dissocié de *bénéficier*. Toujours via un
