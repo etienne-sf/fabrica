@@ -190,6 +190,10 @@ zone protégée : STOP, signaler comme décision humaine, ne pas le faire.
   confort contournable et absent pour un connecteur ; le serveur ne fait jamais confiance à
   un contrôle amont. Une définition de règle, deux moteurs d'exécution (défense en
   profondeur), zéro logique dupliquée.
+- **Pas d'attribut multivalué.** Un attribut porte une **valeur unique** (première forme
+  normale). Un besoin de plusieurs valeurs n'est pas un attribut mais une **relation (N-1)** —
+  ainsi la multiplicité est une vraie entité gouvernable (colonnes système, traçabilité,
+  sécurité, historisation), au lieu d'un tableau opaque dans une colonne.
 - **Pas de dénormalisation par défaut.** La forme **normalisée** est le défaut ; la
   dénormalisation est une **optimisation locale justifiée par une mesure**, jamais par
   anticipation. On ne réfléchit à dénormaliser qu'**après avoir constaté** un problème de
@@ -227,7 +231,7 @@ Confidentialité, Traçabilité** (DICT). Elle **ne vise pas le niveau maximal p
 critère, et **rend l'implémentation mesurable** : on doit pouvoir vérifier quels mécanismes de
 sécurité sont effectivement en place (p. ex. si un niveau de confidentialité élevé exige une
 donnée chiffrée ou des droits particuliers, le constater et le monitorer). **L'intégrité des
-données est une mission fondatrice** du cœur.
+données est une mission fondatrice** du cœur. **La capture de traçabilité (historisation, audit) doit être vérifiable** : Fabrica doit pouvoir constater qu'elle est active et complète et alerter en cas de défaillance — un trou de traçabilité ne doit **jamais** être silencieux.
 
 Le détail (mécanismes par critère, mesure de conformité, chiffrement) relève d'ADR dédiés ; ce
 principe fixe le cadre et l'exigence de mesurabilité, pas leur mise en œuvre.

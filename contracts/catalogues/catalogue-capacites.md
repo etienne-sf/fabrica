@@ -11,6 +11,7 @@
 |---|---|---|
 | `colonnes-systeme` | `sys_id`, dates, `_by`, `sys_version`, `sys_class` | **ADR-0020** |
 | `actif` | booléen `actif` (suppression logique, filtre) | **ADR-0023** |
+| `valeur-affichage` | représentation d'affichage d'un objet (*display value*) — consommée par références, listes, historisation | **ADR-0027** (déf.) ; dette « attributs calculés » |
 
 ## Optionnelles (activées par le projet)
 
@@ -18,6 +19,7 @@
 |---|---|---|
 | `à-états` | `state` + graphe de transitions + cycle de vie | **ADR-0019** |
 | `numérotée` | `number` + préfixe + séquence + unicité | *décrite ci-dessous (ADR à créer si besoin)* |
+| `historiser` | historique des changements « qui a changé quoi », par attribut marqué | **ADR-0027** |
 
 ### `numérotée` (description — voir dette « numérotation »)
 Active un identifiant fonctionnel `number` : n'existe que si activée ; alors **obligatoire et
@@ -30,7 +32,7 @@ immuable, séquence, continuité) → mérite un ADR propre à terme.*
 
 | Capacité | Intention | Lien |
 |---|---|---|
-| `auditée` | historisation (qui a changé quoi, avant/après) | dette historisation ; DICT-Traçabilité |
+| `audit-traçabilité` | audit sécurité (accès/actions sensibles) — **distinct de `historiser`** | dette audit ; DICT-Traçabilité |
 | `journalisée` | logs techniques attachés | dette journalisation |
 | `affectable` | affectation à personne/groupe, file de travail | dette affectation (version ultérieure) |
 | `commentable` | notes/commentaires attachés | dette commentaires (axe ligne) |

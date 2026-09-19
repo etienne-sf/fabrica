@@ -1,4 +1,4 @@
-# ADR-0017 — Internationalisation : clés, espace de noms, langues
+# ADR-0017 — Internationalisation & localisation : traduction, formats, préférences
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Transverse : concerne tout ce
@@ -91,6 +91,38 @@ Il ne peut **pas** redéfinir une traduction Fabrica (**surcharge** non construi
 - La **surcharge est réservée** comme point d'extension **additif** (ADR-0013) : l'ajouter plus tard
   **ne casse aucun contrat** (élargit ce que le projet peut faire). Son **déclencheur naturel** : un
   projet ayant besoin d'une langue que Fabrica ne fournit pas pour ses libellés.
+
+## Formatage localisé des valeurs (distinct de la traduction)
+
+La **traduction** (ci-dessus) substitue une **clé** par un texte selon la **langue**. Le
+**formatage** rend une **valeur typée** selon des **règles de locale** — c'est un mécanisme
+**distinct** (pas de clé ; une locale + un type), délégué à la **même bibliothèque i18n** (API
+standard de formatage).
+
+**Trois préférences utilisateur distinctes** (chacune avec défaut d'instance + surcharge
+utilisateur, comme la langue) :
+- **langue** : pour les **textes** traduits ;
+- **format des nombres** : séparateurs de milliers/décimales ;
+- **format des dates/heures**.
+
+Elles ne sont **pas corrélées** (interface en anglais, nombres au format français, dates en ISO
+est un choix légitime). Les trois voyagent dans le **contexte de rendu** propagé à chaque requête
+(comme l'identité, ADR-0010).
+
+**Formatage par type d'attribut, rendu selon l'utilisateur qui *affiche*** (jamais selon celui
+qui a saisi) :
+- **nombre** : format des nombres de l'utilisateur (dont sous-cas monétaire) ;
+- **date / heure** : format des dates de l'utilisateur ;
+- **chaîne** : telle quelle ;
+- **booléen** : libellé traduit (vrai/faux dans la langue) ;
+- **liste de valeurs** : **label traduit** de la valeur (pas le code) ;
+- **référence** : on stocke/manipule le `sys_id` ; on **affiche la valeur d'affichage**
+  (*display value*) de l'objet cible, **résolue à la lecture** selon l'état courant (capacité
+  obligatoire des entités — ADR historisation / capacités). Un objet renommé s'affiche sous son
+  nom **actuel** : ce qui compte est *quel objet*, pas quel nom il portait alors.
+
+Ce formatage est consommé partout où une valeur est affichée : formulaires, listes,
+**historisation** (ADR historisation), exports lisibles.
 
 ## Contrat de message (pour les points d'entrée / scripts)
 
