@@ -17,6 +17,7 @@
 - **0018** (P) Listes de valeurs (table de référence, désactivation, conditionnement).
 - **0020** (P) Colonnes système (sys_id, dates, _by, sys_version, sys_class).
 - **0023** (P) Relations entre entités (N:1/1:N bidirectionnel, N:N en entité de liaison, `actif`).
+- **0025** (P) Capacités d'entité (mécanisme ; catalogue `contracts/catalogues/catalogue-capacites.md`).
 
 ## Moteur GraphQL & isolation
 - **0007** (P) Isolation des projets vis-à-vis du moteur.
@@ -46,11 +47,13 @@
 
 ## Numéros
 - **0015** a d'abord porté « effets multi-canaux », déplacé vers **0006** ; réattribué au moteur de règles.
-- Pas de trou ; **0025** est le prochain libre.
+- Pas de trou ; **0026** est le prochain libre.
+
+## Catalogues (contracts/catalogues/)
+Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** (ADR-0025), **catalogue-effets.md** (ADR-0006), **catalogue-natures-acl.md** (ADR-0012), **catalogue-canaux.md** (ADR-0006). Motif : constitution § Catalogues.
 
 ## Dettes — ADR à écrire (référencés, non rédigés)
 **Structurants / prioritaires :**
-- **Capacités d'entité** (mécanisme activant des paquets : à-états, numérotée…) — cadre de 0019, 0020.
 - **Points d'entrée / scripts** (confluent — à traiter en dernier).
 - **Axe ligne / RLS** (commentaires, délégation, rattachement utilisateur↔ligne ; raccorde 0010).
 

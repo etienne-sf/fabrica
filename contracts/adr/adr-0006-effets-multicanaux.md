@@ -116,6 +116,15 @@ Le conditionnement d'une liste par un autre attribut est **déclaré** dans la d
   qui est vidé à son tour, jusqu'au point fixe. La récursivité n'est pas un mécanisme ajouté — c'est
   l'itération du moteur des effets appliquée aux dépendances de listes.
 
+## Prérequis de capacités
+
+Un effet peut déclarer des **prérequis de capacités d'entité** (ADR-0025) : il n'est **proposé au
+paramétrage** d'une entité que si celle-ci a les capacités requises actives. Exemple : un effet
+« affecter à un groupe à telle transition » requiert `à-états` (transition) **et** `affectable`
+(affectation). C'est ainsi que les combinaisons se contraignent — **au niveau des effets**, jamais
+par des dépendances entre capacités (qui restent indépendantes). Le catalogue d'effets disponibles
+est donc **filtré par les capacités de l'entité**.
+
 ## Extensibilité
 
 Catalogue **fermé, extensible par Fabrica**. Critère d'admission : le comportement de l'effet est

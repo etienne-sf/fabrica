@@ -228,6 +228,23 @@ données est une mission fondatrice** du cœur.
 Le détail (mécanismes par critère, mesure de conformité, chiffrement) relève d'ADR dédiés ; ce
 principe fixe le cadre et l'exigence de mesurabilité, pas leur mise en œuvre.
 
+## Catalogues
+
+Plusieurs mécanismes de Fabrica reposent sur des **catalogues fermés** : des ensembles
+d'éléments (natures d'ACL, effets, capacités d'entité, canaux…) que **Fabrica seule connaît et
+sait mettre en œuvre**. Un projet **active ou référence** une entrée d'un catalogue, il n'en
+**crée** jamais : Fabrica est la seule à pouvoir étendre un catalogue, par ses versions, parce
+qu'elle doit savoir câbler chaque entrée. Les catalogues sont documentés dans
+`contracts/catalogues/` (une source par famille) et sont destinés à devenir des **données
+système réflexives** (interrogeables en RUN, comme le métamodèle). Une entrée qui **porte une
+décision** (un choix entre alternatives, avec conséquences) fait l'objet d'un **ADR**, vers
+lequel le catalogue **renvoie** ; une entrée qui n'est que l'**application d'un mécanisme déjà
+décidé** est simplement **décrite** dans le catalogue. Un catalogue ne contient donc jamais de
+décision — c'est un registre navigable, jamais une source de vérité concurrente des ADR.
+
+Ce motif est de la même famille que le Principe IV (le cœur ignore le domaine) et que les
+points d'extension : **Fabrica maîtrise, le projet consomme, jamais l'inverse.**
+
 ## Governance
 
 Cette constitution prime sur toute autre pratique. En cas de conflit entre un artefact
