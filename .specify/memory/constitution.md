@@ -253,6 +253,25 @@ décision — c'est un registre navigable, jamais une source de vérité concurr
 Ce motif est de la même famille que le Principe IV (le cœur ignore le domaine) et que les
 points d'extension : **Fabrica maîtrise, le projet consomme, jamais l'inverse.**
 
+## Gabarits fournis par Fabrica
+
+Certaines configurations livrées par Fabrica (politique d'audit, configuration de journalisation…)
+suivent le motif du **gabarit fourni** — mécanisme **interne à Fabrica** qui concilie « Fabrica
+apporte de la valeur toute faite » et « le projet garde le contrôle total », **sans le merge
+destructif** des progiciels :
+- Fabrica fournit un **gabarit** (une configuration par défaut) **non appliqué** en l'état.
+- **Modes d'application** au projet : *proposition explicite* (Fabrica propose, le projet
+  accepte/refuse) ou *enrichissement* (Fabrica ajoute, avec message d'info, et cela devient du
+  paramétrage projet ajustable).
+- **Règle anti-merge** : un **ajout** (nouvel élément) est **additif** — il peut être appliqué
+  silencieusement, il n'écrase rien. Une **modification** d'un élément que le projet a personnalisé
+  est **proposée**, jamais imposée.
+- **Découplage** : Fabrica fait évoluer ses gabarits sans changer ce que le projet a appliqué ; le
+  projet n'adopte une évolution que par décision explicite. Le gabarit Fabrica et la copie projet
+  sont deux exemplaires distincts.
+- *(Réservé)* un gabarit pourra avoir **plusieurs versions** (p. ex. log minimal / moyen / maximal),
+  le projet choisissant celle qu'il applique.
+
 ## Governance
 
 Cette constitution prime sur toute autre pratique. En cas de conflit entre un artefact

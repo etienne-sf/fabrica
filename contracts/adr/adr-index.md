@@ -41,6 +41,7 @@
 
 ## Transverse
 - **0014** (P) Déploiement à chaud : instance, versions, rolling update.
+- **0029** (P) Journalisation technique (logs) — observabilité exploitants/maintenance.
 - **0017** (P) Internationalisation & localisation : traduction, formats, préférences.
 
 ## Différés (identifiés, non traités v1)
@@ -50,7 +51,7 @@
 
 ## Numéros
 - **0015** a d'abord porté « effets multi-canaux », déplacé vers **0006** ; réattribué au moteur de règles.
-- Pas de trou ; **0029** est le prochain libre.
+- Pas de trou ; **0030** est le prochain libre.
 
 ## Catalogues (contracts/catalogues/)
 Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** (ADR-0025), **catalogue-effets.md** (ADR-0006), **catalogue-natures-acl.md** (ADR-0012), **catalogue-canaux.md** (ADR-0006). Motif : constitution § Catalogues.
@@ -60,7 +61,9 @@ Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** 
 - **Points d'entrée / scripts** (confluent — à traiter en dernier).
 
 **Autres :**
-- Patron « gabarit fourni mais non appliqué, copié sur décision projet » (à formaliser au 2e usage).
+- Reporting (tableaux de bord, analyses, alertes) — gros sujet distinct, second temps.
+- Dettes de migration / gate de packaging (décisions projet exigées à la montée de version Fabrica).
+- Comment un projet définit son usage de Fabrica dans toutes ses phases (dev, run, packaging, déploiement, sauvegarde, clonage) — outillage.
 - Attributs calculés / dérivés (dont display value « prénom nom »).
 - Observabilité de la sécurité / conformité (mesurer le niveau DICT effectivement atteint).
 - Règles d'intégrité (frontière intégrité/autorisation).
