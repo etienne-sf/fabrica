@@ -33,12 +33,16 @@ Fabrica impose la **coquille commune** (entité → liste de (capacité, paramé
 définit le **schéma de son bloc**. Même motif que la charge utile structurée par nature des ACL
 (ADR-0012) : on uniformise la **structure d'accueil**, pas le contenu.
 
-## Décision — obligatoires vs optionnelles
+## Décision — capacités système vs optionnelles
 
-- **Capacités obligatoires** (toujours actives, non supprimables) : au démarrage, **colonnes
-  système** (ADR-0020) et **`actif`** (ADR-0023). Elles **réservent leurs noms d'attributs**
-  (`sys_*`, `actif`) — un projet ne peut pas les redéfinir (cohérent préfixes réservés, ADR-0017).
-- **Capacités optionnelles** : activées par le projet (`à-états`, `numérotée`…).
+- **Capacités système** (présentes sur **toute** entité, non supprimables) : au démarrage,
+  **colonnes système** (ADR-0020), **`actif`** (ADR-0023), **`valeur-affichage`** (ADR-0027) et
+  **`audit`** (ADR-0028). Elles **réservent leurs noms d'attributs** (`sys_*`, `actif`) — un projet
+  ne peut pas les redéfinir (préfixes réservés, ADR-0017). Une capacité système est un **organe
+  toujours présent** dont le **comportement à l'exécution est déterminé par sa configuration**
+  (souvent inerte par défaut ; ex. `audit` ne fait rien tant qu'aucun niveau de traçabilité n'est
+  déclaré). La configuration ne crée/supprime pas la capacité — elle règle ce qu'elle **fait**.
+- **Capacités optionnelles** : activées par le projet (`à-états`, `numérotée`, `historiser`…).
 
 ## Décision — indépendance des capacités, prérequis au niveau des effets
 

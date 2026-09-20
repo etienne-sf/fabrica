@@ -5,13 +5,14 @@
 > est **décrite** ici. Ce fichier ne contient jamais de décision — il renvoie ou décrit.
 > Destiné à devenir une **donnée système réflexive**. Source de vérité : ce fichier (git).
 
-## Obligatoires (toujours actives, non supprimables ; réservent leurs noms)
+## Système (présentes sur toute entité, non supprimables ; réservent leurs noms ; comportement configuré)
 
 | Capacité | Apporte | Décision |
 |---|---|---|
 | `colonnes-systeme` | `sys_id`, dates, `_by`, `sys_version`, `sys_class` | **ADR-0020** |
 | `actif` | booléen `actif` (suppression logique, filtre) | **ADR-0023** |
 | `valeur-affichage` | représentation d'affichage d'un objet (*display value*) — consommée par références, listes, historisation | **ADR-0027** (déf.) ; dette « attributs calculés » |
+| `audit` | traçabilité sécurité — **comportement configuré par le niveau de traçabilité** de l'entité/attribut (rien par défaut) | **ADR-0028** |
 
 ## Optionnelles (activées par le projet)
 
@@ -32,7 +33,6 @@ immuable, séquence, continuité) → mérite un ADR propre à terme.*
 
 | Capacité | Intention | Lien |
 |---|---|---|
-| `audit-traçabilité` | audit sécurité (accès/actions sensibles) — **distinct de `historiser`** | dette audit ; DICT-Traçabilité |
 | `journalisée` | logs techniques attachés | dette journalisation |
 | `affectable` | affectation à personne/groupe, file de travail | dette affectation (version ultérieure) |
 | `commentable` | notes/commentaires attachés | dette commentaires (axe ligne) |

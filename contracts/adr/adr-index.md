@@ -19,6 +19,7 @@
 - **0023** (P) Relations entre entités (N:1/1:N bidirectionnel, N:N en entité de liaison, `actif`).
 - **0025** (P) Capacités d'entité (mécanisme ; catalogue `contracts/catalogues/catalogue-capacites.md`).
 - **0027** (P) Historisation des changements (capacité `historiser`).
+- **0028** (P) Audit de traçabilité (« T » de DICT ; capacité système `audit`).
 
 ## Moteur GraphQL & isolation
 - **0007** (P) Isolation des projets vis-à-vis du moteur.
@@ -49,7 +50,7 @@
 
 ## Numéros
 - **0015** a d'abord porté « effets multi-canaux », déplacé vers **0006** ; réattribué au moteur de règles.
-- Pas de trou ; **0028** est le prochain libre.
+- Pas de trou ; **0029** est le prochain libre.
 
 ## Catalogues (contracts/catalogues/)
 Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** (ADR-0025), **catalogue-effets.md** (ADR-0006), **catalogue-natures-acl.md** (ADR-0012), **catalogue-canaux.md** (ADR-0006). Motif : constitution § Catalogues.
@@ -59,7 +60,7 @@ Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** 
 - **Points d'entrée / scripts** (confluent — à traiter en dernier).
 
 **Autres :**
-- Audit de traçabilité (« T » de DICT ; distinct de l'historisation).
+- Patron « gabarit fourni mais non appliqué, copié sur décision projet » (à formaliser au 2e usage).
 - Attributs calculés / dérivés (dont display value « prénom nom »).
 - Observabilité de la sécurité / conformité (mesurer le niveau DICT effectivement atteint).
 - Règles d'intégrité (frontière intégrité/autorisation).
