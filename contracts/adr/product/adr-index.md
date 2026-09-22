@@ -1,4 +1,9 @@
-# Index des ADR — Fabrica
+# Index des ADR — Fabrica / **Produit** (product)
+
+> Famille **Produit** : comportement de Fabrica et de l'application générée. Ce sont des décisions
+> de conception dont beaucoup sont des **bonnes pratiques réutilisables** (au-delà de Fabrica).
+> La famille **Outillage** (fabrication/packaging/déploiement/exploitation) est dans `../tool/`.
+
 
 > Vue de lecture, tenue à jour au fil de l'eau. **Les numéros sont des identifiants, pas un ordre de
 > lecture** : cet index donne l'ordre logique et les liens. À vérifier contre le dépôt git (source de
