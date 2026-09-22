@@ -38,7 +38,8 @@
 - **0026** (P) Autorisation par ligne (RLS) : axes de gouvernance, accroche, conditions.
 
 ## Règles, effets, comportements
-- **0003** (P) Contrat d'IHM piloté par le métamodèle (formulaires/listes).
+- **0003** (P) Contrat d'IHM piloté par le métamodèle (formulaires/listes). ↔ tool: éditeur de vues (dette)
+- **0030** (P) Rendu de l'IHM : interprète dynamique React/TS, catalogue de composants. ↔ tool: éditeur de vues (dette)
 - **0006** (P) Effets multi-canaux : catalogue, régimes d'application. *(remplace l'ancien 0006 IHM)*
 - **0015** (P) Moteur de règles : composant générique encapsulé.
 - **0016** (P) Moteur des effets : orchestration, point fixe, application.
@@ -56,7 +57,7 @@
 
 ## Numéros
 - **0015** a d'abord porté « effets multi-canaux », déplacé vers **0006** ; réattribué au moteur de règles.
-- Pas de trou ; **0030** est le prochain libre.
+- Pas de trou ; **0031** est le prochain libre.
 
 ## Catalogues (contracts/catalogues/)
 Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** (ADR-0025), **catalogue-effets.md** (ADR-0006), **catalogue-natures-acl.md** (ADR-0012), **catalogue-canaux.md** (ADR-0006). Motif : constitution § Catalogues.

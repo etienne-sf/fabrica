@@ -13,6 +13,7 @@
 | `catalogue-natures-acl.md` | Natures d'ACL (`donnée:lecture/…/suppression`, `fonctionnalité:*`) | **ADR-0012** |
 | `catalogue-canaux.md` | Régimes d'application des effets (donnée / formulaire) | **ADR-0006** |
 | `catalogue-conditions-ligne.md` | Conditions de l'axe ligne (valeur, relation-utilisateur) + axes de gouvernance (utilisateur, groupe) | **ADR-0026** |
+| `catalogue-composants.md` | Composants de rendu IHM (mapping type d'attribut → composant) | **ADR-0030** |
 
 ## Règle commune (constitution § Catalogues)
 - **Fermé** : le projet **active/référence**, il n'**invente** pas. Extensible **par Fabrica**.
