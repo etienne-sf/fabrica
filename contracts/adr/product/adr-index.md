@@ -40,6 +40,10 @@
 ## Règles, effets, comportements
 - **0003** (P) Contrat d'IHM piloté par le métamodèle (formulaires/listes). ↔ tool: éditeur de vues (dette)
 - **0030** (P) Rendu de l'IHM : interprète dynamique React/TS, catalogue de composants. ↔ tool: éditeur de vues (dette)
+- **0031** (P) Mécanisme de script : contexte (objet courant), sandbox pur, contrat. ↔ tool: mise à disposition du code (dette)
+- **0032** (P) Attributs calculés & valeur d'affichage (display value) — 1er client de 0031.
+- **0033** (P) Numérotation : capacité `numérotée`, identifiant fonctionnel `number` (6 chiffres).
+- **0034** (P) Forme des URLs : `/{code_entité}/{sys_id}` au MVP (numéro réservé).
 - **0006** (P) Effets multi-canaux : catalogue, régimes d'application. *(remplace l'ancien 0006 IHM)*
 - **0015** (P) Moteur de règles : composant générique encapsulé.
 - **0016** (P) Moteur des effets : orchestration, point fixe, application.
@@ -57,10 +61,16 @@
 
 ## Numéros
 - **0015** a d'abord porté « effets multi-canaux », déplacé vers **0006** ; réattribué au moteur de règles.
-- Pas de trou ; **0031** est le prochain libre.
+- Pas de trou ; **0035** est le prochain libre.
 
 ## Catalogues (contracts/catalogues/)
 Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** (ADR-0025), **catalogue-effets.md** (ADR-0006), **catalogue-natures-acl.md** (ADR-0012), **catalogue-canaux.md** (ADR-0006). Motif : constitution § Catalogues.
+
+## Notes de conception (propriétés, pas des ADR)
+- **Ordre des attributs** : propriété du **métamodèle** (l'ordre dans la liste des attributs d'une
+  entité). Assure la **stabilité/canonicité** des fichiers JSON (tool-0001) et sert de **défaut** aux
+  usages (formulaire, liste, API). Surcharge par vue : réservée. → à porter dans l'ADR métamodèle /
+  le méta-métamodèle.
 
 ## Dettes — ADR à écrire (référencés, non rédigés)
 **Structurants / prioritaires :**
