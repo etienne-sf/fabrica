@@ -2,8 +2,7 @@
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Mécanisme neutre de base ; le
-cycle de vie, la projection API et la surcharge/modules sont renvoyés à leurs ADR. À éclater en
-`contracts/adr/0018-listes-de-valeurs.md`.
+cycle de vie, la projection API et la surcharge/modules sont renvoyés à leurs ADR.
 
 ---
 
@@ -13,7 +12,7 @@ Une **liste de valeurs** conditionne un attribut dans un **domaine de valeurs** 
 tâche parmi un ensemble défini). À distinguer nettement des **données d'une entité** (les
 enregistrements métier) — hors sujet. Une liste de valeurs est un **mécanisme neutre unique** : il
 n'y a pas plusieurs « natures » de listes ; ce que le cycle de vie ajoute (transitions, contrôles)
-se greffe *par-dessus*, ailleurs (ADR cycle de vie à venir).
+se greffe *par-dessus*, ailleurs (ADR-0019).
 
 ## Décision — structure
 
@@ -65,7 +64,7 @@ cocher).
 
 ## Hors périmètre (renvois)
 
-- **Cycle de vie des objets** (états = une liste, plus transitions et contrôles) → ADR à venir.
+- **Cycle de vie des objets** (états = une liste, plus transitions et contrôles) → ADR-0019.
 - **Conditionnement par plusieurs attributs** : écarté (limité à un attribut).
 - **Projection des listes dans le contrat d'API** (type énuméré exposé, impact des montées de
   version sur les consommateurs) → ADR à venir (délicat à cause du versionnement).

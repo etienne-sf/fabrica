@@ -3,8 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Réalise la **Traçabilité** du
 cadre DICT (constitution). Distinct de l'**historisation** (métier, exhaustive — ADR-0027) et de la
-**journalisation technique** (exploitants — ADR distinct). À éclater en
-`contracts/adr/0028-audit-tracabilite.md`.
+**journalisation technique** (exploitants — ADR distinct).
 
 ---
 

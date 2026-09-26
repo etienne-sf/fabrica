@@ -3,7 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Débloque plusieurs ADR
 qui la présupposaient (0005 orchestration d'écriture, 0007 isolation, 0010 propagation
-d'identité). À éclater en `contracts/adr/0011-moteur-graphql.md`.
+d'identité).
 
 ---
 

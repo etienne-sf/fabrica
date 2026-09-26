@@ -2,8 +2,7 @@
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Point d'ancrage
-présupposé par l'ADR-0007 (isolation) et l'ADR-0008 (trajectoire BFF). À éclater en
-`contracts/adr/0010-identite-propagation.md`.
+présupposé par l'ADR-0007 (isolation) et l'ADR-0008 (trajectoire BFF).
 
 > Cet ADR **possède** la plomberie d'identité et la frontière unique. Il **renvoie** sans les
 > redécider : l'autorisation d'écriture par (entité, attribut) → constitution ; la RLS et

@@ -3,8 +3,9 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Socle dont dépendent les
 ADR déploiement à chaud, montées de version, personnalisation. Précise et complète le principe
-« Contrat public du cœur » de la constitution. À éclater en
-`contracts/adr/0013-anatomie-propriete.md`.
+« Contrat public du cœur » de la constitution.
+
+> **Mise à jour du 2026-09-26 (nettoyage).** Deux points sont **partiellement remplacés** : le runtime de scripts, « réservé » ici, a son **noyau ouvert au MVP** (**ADR-0031**) ; les **fonctionnalités custom du projet** restent non retenues. L'anatomie est complétée par les **capacités d'entité** (**ADR-0025**) et, côté outillage, par **tool-0001** et **tool-0003** (dépôt projet, version de Fabrica épinglée, surcharges d'entités Fabrica).
 
 ---
 

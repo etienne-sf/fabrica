@@ -3,8 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). **Méta-mécanisme** : définit ce
 qu'est une capacité et comment elle s'active. La **liste** des capacités vit dans
-`contracts/catalogues/catalogue-capacites.md` (motif « Catalogues », constitution). À éclater en
-`contracts/adr/0025-capacites-entite.md`.
+`contracts/catalogues/catalogue-capacites.md` (motif « Catalogues », constitution).
 
 ---
 
@@ -36,7 +35,7 @@ définit le **schéma de son bloc**. Même motif que la charge utile structurée
 ## Décision — capacités système vs optionnelles
 
 - **Capacités système** (présentes sur **toute** entité, non supprimables) : au démarrage,
-  **colonnes système** (ADR-0020), **`actif`** (ADR-0023), **`valeur-affichage`** (ADR-0027) et
+  **colonnes système** (ADR-0020), **`actif`** (ADR-0023), **`valeur-affichage`** (ADR-0032) et
   **`audit`** (ADR-0028). Elles **réservent leurs noms d'attributs** (`sys_*`, `actif`) — un projet
   ne peut pas les redéfinir (préfixes réservés, ADR-0017). Une capacité système est un **organe
   toujours présent** dont le **comportement à l'exécution est déterminé par sa configuration**

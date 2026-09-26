@@ -3,7 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Transverse : concerne tout ce
 qui est **affiché à l'utilisateur**. Définit le **contrat de message** que les points d'entrée
-devront respecter (ADR scripts à venir). À éclater en `contracts/adr/0017-internationalisation.md`.
+devront respecter (noyau de script : ADR-0031).
 
 ---
 
@@ -157,8 +157,9 @@ fonctionnel (ok / avertissement / ko — ADR-0006), une liste de **messages** :
 
 ## Renvois / dettes ouvertes
 
-- **Points d'entrée / scripts** (ADR à venir) : appliqueront le *contrat de message* ci-dessus.
-- **Journalisation / observabilité** (ADR à venir) : logs techniques, niveau courant réglable au
+- **Scripts** (noyau : ADR-0031 — retour texte au MVP) : les points d'entrée qui rendront des
+  messages appliqueront le *contrat de message* ci-dessus (ADR à venir).
+- **Journalisation / observabilité** (ADR-0029) : logs techniques, niveau courant réglable au
   runtime, affinage par composant (façon log4j).
-- **Cycle de vie des objets** (ADR à venir) : états et transitions (soulevé par le cas des statuts).
+- **Cycle de vie des objets** (ADR-0019) : états et transitions (soulevé par le cas des statuts).
 - **Surcharge des traductions** : extension additive réservée.

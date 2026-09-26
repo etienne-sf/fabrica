@@ -2,8 +2,7 @@
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Principe-parent de
-l'ADR-0009 (gouvernance de l'extraction). À éclater en
-`contracts/adr/0008-api-frontiere-securite.md`.
+l'ADR-0009 (gouvernance de l'extraction).
 
 ---
 

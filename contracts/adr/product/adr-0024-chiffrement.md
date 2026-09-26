@@ -2,8 +2,7 @@
 
 **Statut :** Différé (non traité en v1) — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica). Réalise le « C » (Confidentialité) du cadre DICT de la
-constitution. Identifie et borne le sujet ; ne le tranche pas. À éclater en
-`contracts/adr/0024-chiffrement.md`.
+constitution. Identifie et borne le sujet ; ne le tranche pas.
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Définit les colonnes présentes
-sur **toute** table. À éclater en `contracts/adr/0020-colonnes-systeme.md`.
+sur **toute** table.
 
 ---
 
@@ -17,7 +17,7 @@ identité de session).
 par Fabrica**, est **non modifiable par l'utilisateur**. Ce qui échoue à l'un de ces tests n'est pas
 une colonne système — ainsi `number` (n'existe que si l'entité est « numérotée », et il est visible
 comme identifiant fonctionnel) **n'est pas** une colonne système : il relève de la **capacité
-d'entité « numérotée »** (ADR capacités d'entité à venir), hors périmètre ici.
+d'entité « numérotée »** (ADR-0025, ADR-0033), hors périmètre ici.
 
 ## Liste normative des colonnes système (toute table)
 
@@ -88,11 +88,10 @@ Les colonnes système sont posées par les **crochets `before-create` / `before-
   l'entité l'active ; alors **obligatoire et unique** ; préfixe (trigramme/quadrigramme, immuable au
   démarrage, changement = migration réservée) + nombre de chiffres (6 par défaut) ; croissant, unique,
   **sans garantie de continuité** (un numéro réservé puis non utilisé laisse un trou — assumé, cf. cas
-  du ticket ouvert puis abandonné) ; compteur du prochain numéro stocké par Fabrica. → ADR capacités
-  d'entité / numérotation.
+  du ticket ouvert puis abandonné) ; compteur du prochain numéro stocké par Fabrica. → ADR-0033.
 - **Capacités d'entité** : mécanisme générique par lequel une entité active un paquet cohérent
-  (colonnes, contraintes, comportements) — `à-états` (ADR-0019), `numérotée`, et à venir. → ADR
-  distinct ; amendera l'anatomie (ADR-0013).
+  (colonnes, contraintes, comportements) — `à-états` (ADR-0019), `numérotée`, et à venir. → ADR-0025 ;
+  amendera l'anatomie (ADR-0013).
 - **Re-classification** (changement de `sys_class`) : ADR dédié, non prérequis v1.
 - **Fonctions d'administration / introspection** (récupérer sys_id, code technique d'un champ,
   représentation YAML/GraphQL d'un objet réutilisable en requête, liste contraignant un champ…) : ADR

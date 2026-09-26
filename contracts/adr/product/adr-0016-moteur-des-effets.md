@@ -2,7 +2,7 @@
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Orchestre le moteur de règles
-(ADR-0015) et applique les effets (ADR-0006). À éclater en `contracts/adr/0016-moteur-des-effets.md`.
+(ADR-0015) et applique les effets (ADR-0006).
 
 ---
 

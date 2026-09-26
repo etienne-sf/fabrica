@@ -3,7 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Capacité d'entité (mécanisme :
 ADR-0025). Distincte de l'**audit de traçabilité** (« T » de DICT, ADR distinct) et de la
-**journalisation technique** (ADR distinct). À éclater en `contracts/adr/0027-historisation.md`.
+**journalisation technique** (ADR distinct).
 
 ---
 

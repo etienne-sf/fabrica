@@ -18,6 +18,21 @@
 ## Numéros
 - Prochain libre : **tool-0004**.
 
+## Revue du 2026-09-26 — à traiter pour le MVP
+
+- **Topologie des dépôts au MVP** : ADR-0002 et la constitution placent le projet EA dans le dépôt
+  du cœur jusqu'à la bascule ; tool-0002 et tool-0003 supposent un dépôt projet qui épingle une
+  version de Fabrica. À trancher (piste : monodépôt à deux paquets, le projet EA épinglant le cœur
+  local).
+- **Stratégie de test de Fabrica** : tests d'acceptation gelés (Principe II), test de l'interprète
+  dynamique (ADR-0030), invariant de sécurité gelé (ADR-0010), instantanés du schéma généré
+  (Principe IV). Préalable à la première génération.
+- **Chargement des données de démonstration** : l'import est hors MVP et le seed a été défini pour
+  des états initiaux ; il faut un moyen de peupler un référentiel crédible (seed étendu ou import
+  minimal).
+- **Passage des ADR du MVP au statut « Accepté »**, datés, à la première génération (constitution,
+  « Cycle de vie des ADR »).
+
 ## Dettes — ADR outillage à écrire
 - **Développement concurrent** (résolution de conflits) & **affichage des écarts** entre versions.
 - **Droits dans l'outil de développement** (2ᵉ système d'autorisation, distinct du RUN).

@@ -2,7 +2,7 @@
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Composant utilisé par le
-moteur des effets (ADR-0016). À éclater en `contracts/adr/0015-moteur-de-regles.md`.
+moteur des effets (ADR-0016).
 
 ---
 

@@ -3,7 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV).
 **Remplace** la version initiale de l'ADR-0006 (« effets d'IHM déclaratifs »), limitée au seul
-canal IHM. À éclater en `contracts/adr/0006-effets-multicanaux.md`.
+canal IHM.
 
 ---
 
@@ -148,10 +148,11 @@ défini **pour les deux régimes** (vérification + projection formulaire). Dém
 
 ## Renvois
 
-- **Moteur de règles** (ADR à venir) : évaluation, point fixe, état final, non-convergence,
-  optimisation. Le présent ADR *consomme* son résultat.
-- **Points d'entrée / scripts** (ADR à venir) : déclenchement par script.
-- **Traduction / i18n** (ADR à venir) : messages = clés + placeholders, jamais de texte en dur.
+- **Moteur de règles** (ADR-0015) et **moteur des effets** (ADR-0016) : évaluation, point fixe, état
+  final, non-convergence, optimisation. Le présent ADR *consomme* son résultat.
+- **Scripts** : noyau du mécanisme (ADR-0031) ; déclenchement d'effets par script via les points
+  d'entrée du cycle de données (ADR à venir).
+- **Traduction / i18n** (ADR-0017) : messages = clés + placeholders, jamais de texte en dur.
 - **Sources de données / ingestion** (ADR à venir) : canal en régime vérification.
 - **Listes de valeurs** (ADR-0018) : déclarent le conditionnement, appliqué ici via l'effet `vider` récursif.
 - **Règles d'intégrité** (ADR à venir) : frontière intégrité/autorisation.

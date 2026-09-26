@@ -2,8 +2,7 @@
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Réalise l'**axe ligne**
-d'autorisation (ADR-0012) via la **RLS réservée** de l'ADR-0010. À éclater en
-`contracts/adr/0026-autorisation-ligne.md`.
+d'autorisation (ADR-0012) via la **RLS réservée** de l'ADR-0010.
 
 ---
 

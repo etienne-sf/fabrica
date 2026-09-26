@@ -3,8 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Met en œuvre le principe
 d'autorisation par (entité, attribut) de la **constitution** (« Discipline de développement »),
-qu'il **référence sans le redédire**. Présupposé par les ADR 0003, 0008, 0009, 0010. À éclater
-en `contracts/adr/0012-autorisation.md`.
+qu'il **référence sans le redédire**. Présupposé par les ADR 0003, 0008, 0009, 0010.
 
 > Numérotation = identifiant chronologique. Cet ADR est logiquement antérieur à plusieurs qui
 > le référencent ; l'ordre de lecture est porté par l'index, pas par le numéro.
@@ -17,7 +16,7 @@ L'autorisation se compose de **deux axes** :
 - **Axe structurel — entité/attribut** (le présent ADR) : quel *type* d'objet, quelles
   *colonnes*. L'entité est le grain grossier ; l'attribut en est le raffinement (droit
   d'attribut hérité de l'entité par défaut) — **pas** un axe indépendant.
-- **Axe des lignes** (ADR distinct à venir) : quelles *instances*. Réalisé par la RLS réservée
+- **Axe des lignes** (ADR-0026) : quelles *instances*. Réalisé par la RLS réservée
   de l'ADR-0010.
 
 **Les deux axes sont pilotés par la même structure de rôles.**

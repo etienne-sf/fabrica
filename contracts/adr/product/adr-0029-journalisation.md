@@ -3,7 +3,6 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Troisième membre de la famille
 traçabilité, distinct de l'historisation (ADR-0027, utilisateurs) et de l'audit (ADR-0028, sécurité).
-À éclater en `contracts/adr/0029-journalisation.md`.
 
 ---
 

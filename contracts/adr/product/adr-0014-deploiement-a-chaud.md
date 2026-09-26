@@ -3,8 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Contrainte transverse qui
 s'appuie sur l'additivité déjà décidée (expand/contract, ADR-0002/Principe VI) et la contraint
-pour la suite (montées de version, personnalisation). À éclater en
-`contracts/adr/0014-deploiement-a-chaud.md`.
+pour la suite (montées de version, personnalisation).
 
 ---
 

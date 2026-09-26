@@ -42,11 +42,15 @@ Le moteur stable du projet est la stack sur étagère (PostgreSQL, moteur GraphQ
 code maison. Plus la couche de code volatile est mince, moins la régénération a de surface
 pour nuire.
 
-**Règles.** Une règle exprimable de façon déclarative (contrainte de base, permission
-déclarative, validateur catalogué lié au métamodèle) NE DOIT PAS être codée en impératif.
-Le JavaScript/procédural est réservé à la queue irréductible, rangée côté `contracts/`,
-testée et non régénérable. Mettre en Turing-complet ce qui peut rester déclaratif est une
-régression de gouvernance à refuser.
+**Règles.** Une règle exprimable avec les mécanismes déclaratifs de Fabrica (contrainte de
+base, permission, effet catalogué, condition déclarative, validateur lié au métamodèle) NE DOIT
+PAS être codée en impératif : mettre en Turing-complet ce qui peut rester déclaratif est une
+régression de gouvernance à refuser. En revanche, un **calcul** (valeur dérivée,
+transformation) s'écrit en **script pur exécuté en bac à sable** (ADR-0031) plutôt que dans un
+mini-langage d'expressions maison : réinventer un langage serait précisément le bespoke jetable
+que ce principe combat. Les scripts projet sont autonomes, purs, sans accès ambiant, créés par
+Fabrica au plus près de leur usage (tool-0003), et ne sont jamais régénérés par un agent ; leur
+test par le projet est post-MVP (tool-0001). Le code procédural du cœur est testé.
 
 ### IV. Le code dépend du fonctionnel, jamais l'inverse
 
@@ -58,9 +62,12 @@ deux.
 contient aucune connaissance d'un domaine applicatif particulier — les métamodèles sont des
 **données d'entrée**, jamais du code du cœur. Aucun fichier du cœur ne DOIT nommer un concept
 de domaine (p. ex. « application », « capacité », « chaîne de valeur ») : un tel nom est une
-fuite à corriger. Le métamodèle transverse (`contracts/metamodele.md`) prime sur les vues
-locales de feature ; il pilote la génération du `schema.graphql` et des contraintes de base.
-Toute génération DOIT satisfaire `contracts/schema.graphql` à l'identique. Rationale : sans
+fuite à corriger. Le métamodèle (arborescence de fichiers JSON au format contractuel — tool-0001,
+tool-0003) prime sur les vues locales de feature ; il pilote la génération du schéma de base
+et du schéma GraphQL (ADR-0011). Cette génération est **déterministe** : un même métamodèle
+produit toujours le même schéma, et une régénération du code de Fabrica NE DOIT PAS modifier le
+schéma produit pour un métamodèle donné (vérifié par des tests de non-régression par
+instantané). Rationale : sans
 ce sens de dépendance imposé, on recrée deux sources de vérité et le fonctionnel devient
 l'otage du code ; et un cœur qui « connaît » l'EA n'est pas réutilisable.
 
@@ -73,7 +80,10 @@ propriété humaine, gardé mécaniquement par git, évolué de façon additive 
 humaine et ne sont JAMAIS modifiées par un agent. La garantie est **dure** (CODEOWNERS +
 gate CI + `git diff` vide sur ces zones après toute régénération), jamais confiée à la seule
 chose qui peut franchir la frontière. `src/` et `ui/` sont régénérables à partir de
-`contracts/`. Rationale : on ne confie pas la frontière à l'agent qui a intérêt à la
+`contracts/`. Ces zones et cette garantie concernent le **dépôt de développement de Fabrica**,
+où un agent régénère du code. Les **dépôts projet** ne dépendent d'aucune forge (tool-0003) :
+leur garde est la validation interne de Fabrica, et leurs fichiers sont édités par l'outil
+Fabrica ou par un humain, jamais régénérés par un agent. Rationale : on ne confie pas la frontière à l'agent qui a intérêt à la
 franchir ; la sûreté vient de la mécanique, pas de la bonne volonté.
 
 ### VI. Découpage par volatilité, pas par phase temporelle
@@ -88,7 +98,12 @@ proprement se construit dès la première ligne ou se sacrifie. Le schéma de pe
 n'évolue que par une migration **append-only** (motif expand → backfill → transition →
 contract, le contract dans une livraison ultérieure séparée) ; une migration est relue comme
 critique-production, testée sur données ressemblant à la prod, jamais appliquée
-automatiquement. Rationale : la volatilité, pas le calendrier, décide du niveau de soin.
+automatiquement. Cette règle vise le schéma des **tables de Fabrica** (tables système), dont
+les migrations sont écrites et relues par un humain (`migrations/`). Le schéma des **entités
+d'un projet** est dérivé de son métamodèle : ses évolutions sont calculées par Fabrica à partir
+de la différence entre deux versions du métamodèle, selon le même motif expand/contract ; leurs
+règles restent à définir (ADR à écrire — évolution du schéma projet). Pendant la fenêtre de
+régénération, la perte de données de test est acceptable ; après la bascule, jamais. Rationale : la volatilité, pas le calendrier, décide du niveau de soin.
 
 ### VII. Caler la frontière, pas la politique
 
@@ -112,14 +127,15 @@ après toute régénération (vide + suite d'acceptation au vert = régénérati
 1. **Le contrat de comportement** — `tests/acceptance/` : invariants et scénarios
    exécutables, gelés, hors du dossier de feature régénéré. Chaque bug de production devient
    un nouveau test d'acceptation (cliquet : le filet grandit vague après vague).
-2. **Les données accumulées** — `migrations/` : schéma et migrations append-only, jamais
-   régénérés ; exigence **transactionnelle** (chaque migration réussit entièrement ou échoue
+2. **Les données accumulées** — `migrations/` : schéma et migrations append-only des tables
+   de Fabrica, jamais régénérés (pour le schéma des entités projet, voir Principe VI) ; exigence **transactionnelle** (chaque migration réussit entièrement ou échoue
    proprement, sauvegarde + rollback testés).
-3. **Le contrat lui-même** — `contracts/` : métamodèle + `schema.graphql` versionnés. Le
-   schéma GraphQL fait partie du cœur (c'est le contrat par lequel tout consommateur touche
+3. **Le contrat lui-même** — `contracts/` : ADR, catalogues, méta-métamodèle et spécification
+   du format du métamodèle ; le schéma GraphQL généré pour le banc de validation y est conservé
+   comme **instantané de référence** (Principe IV). Le schéma GraphQL fait partie du cœur (c'est le contrat par lequel tout consommateur touche
    la donnée), pas un simple instrument d'observation.
 
-`CODEOWNERS` + gate CI constituent la garantie dure. `CLAUDE.md` porte les gardes molles
+`CODEOWNERS` + gate CI constituent la garantie dure (dépôt de Fabrica). `CLAUDE.md` porte les gardes molles
 (frontières de propriété rappelées à l'agent) ; en cas de changement nécessaire dans une
 zone protégée : STOP, signaler comme décision humaine, ne pas le faire.
 
@@ -133,8 +149,8 @@ zone protégée : STOP, signaler comme décision humaine, ne pas le faire.
 - **Placement des règles.** Chaque règle s'exécute à la couche la plus profonde qui peut
   l'exprimer pleinement. La base est la dernière ligne infranchissable (tous les chemins
   d'écriture y convergent) ; la frontière GraphQL ajoute ce que la base ne sait pas dire +
-  les messages lisibles ; l'IHM n'est que du confort. Une liste éditable à chaud → table de
-  référence + FK, jamais un `enum`.
+  les messages lisibles ; l'IHM n'est que du confort. Une liste de valeurs → table de référence
+  et clé étrangère par code, jamais un `enum` (ADR-0018).
 - **Serveur autoritaire, client projeté (jamais délégué).** Un contrôle navigateur est un
   confort contournable et absent pour un connecteur ; le serveur ne fait jamais confiance à
   un contrôle amont. Une définition de règle, deux moteurs d'exécution (défense en
@@ -148,8 +164,10 @@ zone protégée : STOP, signaler comme décision humaine, ne pas le faire.
   anticipation. On ne réfléchit à dénormaliser qu'**après avoir constaté** un problème de
   performance sur un cas précis (application de « ne pas sur-concevoir » au domaine des perfs).
 - **Autorisation d'écriture par (entité, attribut)**, imposée à la frontière de mutation sur
-  les seuls attributs réellement modifiés (comparaison entrant/existant). `ecriture: systeme`
-  et `ecriture: <profil>` sont deux natures distinctes, pas deux valeurs d'un même champ.
+  les seuls attributs réellement modifiés (comparaison entrant/existant). Les attributs
+  **posés par le système** (colonnes système, ADR-0020) et les attributs **soumis aux droits**
+  (rôles et natures `donnée:*`, ADR-0012) relèvent de deux mécanismes distincts, pas de deux
+  valeurs d'un même champ.
 
 ## Contrat public du cœur et compatibilité ascendante
 
@@ -254,10 +272,19 @@ aucun concept de domaine) ; sa vérification reste **humaine**, à défaut de ca
 automatique. *(Décision tracée en ADR.)*
 
 **Amendements.** Tout amendement se fait par édition versionnée de ce fichier, en PR, avec
-mise à jour du Sync Impact Report en tête de fichier et propagation aux modèles dépendants
-(`.specify/templates/*.md`). Une décision d'architecture ponctuelle relève d'un ADR
-(`contracts/adr/`, une décision = un fichier) ; seuls les principes non négociables vivent
-ici.
+mise à jour du **journal des amendements** en fin de fichier (et non d'un bloc de commentaire
+en tête, qui masque le rendu Markdown) et propagation aux modèles dépendants
+(`.specify/templates/*.md`). Une décision d'architecture ponctuelle relève d'un ADR — une
+décision = un fichier — rangé dans `contracts/adr/product/` (comportement de Fabrica et de
+l'application générée) ou `contracts/adr/tool/` (outillage) ; seuls les principes non
+négociables vivent ici.
+
+**Cycle de vie des ADR.** Avant la première génération de code, un ADR se modifie librement
+(statut « Proposé »). À la première génération, les ADR retenus passent au statut « Accepté »,
+avec une date réelle, et le corpus est versionné. Tant que le MVP n'est pas jugé mûr (fenêtre
+de régénération), un ADR accepté peut encore être réécrit, la réécriture étant tracée par le
+commit et par sa date de mise à jour. Après la bascule, un ADR accepté n'est plus réécrit : il
+est **remplacé** par un nouvel ADR, et marqué « remplacé par ADR-XXXX ».
 
 **Versionnement (sémantique).**
 - **MAJOR** : retrait ou redéfinition incompatible d'un principe ou d'une règle de
@@ -272,4 +299,21 @@ PR touchant `src/` ou `ui/` vérifie que le `git diff` des zones protégées est
 suite d'acceptation est au vert. Toute dérogation à un principe DOIT être justifiée dans la
 section « Complexity Tracking » du plan, avec l'alternative plus simple explicitement écartée.
 
-**Version**: 1.0.0 | **Ratified**: 2026-07-11 | **Last Amended**: 2026-07-11
+**Version**: 2.0.0 | **Ratified**: 2026-07-11 | **Last Amended**: 2026-09-26
+
+## Journal des amendements
+
+- **2.0.0 — 2026-09-26** (MAJOR : redéfinition des Principes III, IV, V, VI). Principe III :
+  les calculs s'écrivent en script pur en bac à sable (ADR-0031), pas dans un mini-langage
+  maison. Principe IV : métamodèle en arborescence JSON (tool-0001, tool-0003), schéma GraphQL
+  généré de façon déterministe (ADR-0011). Principe V : garantie par la forge limitée au dépôt
+  de Fabrica, dépôts projet sans forge (tool-0003). Principe VI : migrations des tables de
+  Fabrica distinguées de l'évolution du schéma projet, dérivée du métamodèle. Vocabulaire
+  d'autorisation aligné sur l'ADR-0012. Gouvernance : journal des amendements, deux familles
+  d'ADR, cycle de vie des ADR.
+- **1.x — juillet à septembre 2026** (MINOR, non numérotés à l'époque). Ajout des sections
+  « Contrat public du cœur », « Sécurité de l'information (DICT) », « Catalogues », « Gabarits
+  fournis » ; ajout des règles « pas d'attribut multivalué », « pas de dénormalisation par
+  défaut », « capture de traçabilité vérifiable » ; Portée précisée (produit-socle, fenêtre de
+  régénération, banc EA).
+- **1.0.0 — 2026-07-11** : ratification.

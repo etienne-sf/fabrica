@@ -2,8 +2,9 @@
 
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Principe d'architecture
-dont le choix de moteur (ADR à venir) n'est qu'une application. À éclater en
-`contracts/adr/0007-isolation-projets-moteur.md`.
+dont le choix de moteur (ADR-0011) n'est qu'une application.
+
+> **Mise à jour du 2026-09-26 (nettoyage).** La « contrainte pour le futur runtime de règles » ci-dessous est **satisfaite par l'ADR-0031** : le noyau du runtime de scripts est ouvert au MVP, hébergé par Fabrica (bac à sable), jamais par le moteur GraphQL.
 
 > **Réconciliation (post-ADR-0011).** Cet ADR ne nomme aucun moteur : l'isolation est
 > précisément ce qui rend le moteur indifférent. Le moteur d'exécution effectivement retenu

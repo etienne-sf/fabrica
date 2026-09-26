@@ -3,7 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Mécanisme fondamental dont
 dépendent : `sys_created_by`/`sys_updated_by` (ADR-0020), les FK d'héritage (ADR-0005, cas interne),
-l'affectation, les liens inter-entités. À éclater en `contracts/adr/0023-relations-entre-entites.md`.
+l'affectation, les liens inter-entités.
 
 ---
 

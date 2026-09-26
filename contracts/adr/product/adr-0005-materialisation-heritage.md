@@ -5,7 +5,7 @@
 mécanisme de modélisation offert à tout métamodèle-client ; le cœur en fournit la
 matérialisation sans connaître aucun domaine applicatif (Principe IV). Les exemples concrets
 d'un domaine particulier sont relégués à la section « Illustration », explicitement hors du
-contrat du cœur. À éclater en `contracts/adr/0005-materialisation-heritage.md`.
+contrat du cœur.
 
 ---
 

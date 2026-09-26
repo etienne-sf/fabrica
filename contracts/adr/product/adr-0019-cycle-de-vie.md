@@ -3,7 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica), générique (Principe IV). Mécanisme de premier rang,
 optionnel par entité. S'appuie sur les listes de valeurs (ADR-0018), les effets (ADR-0006/0016),
-l'autorisation (ADR-0012), l'i18n (ADR-0017). À éclater en `contracts/adr/0019-cycle-de-vie.md`.
+l'autorisation (ADR-0012), l'i18n (ADR-0017).
 
 ---
 

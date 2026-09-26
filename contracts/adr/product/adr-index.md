@@ -4,7 +4,6 @@
 > de conception dont beaucoup sont des **bonnes pratiques réutilisables** (au-delà de Fabrica).
 > La famille **Outillage** (fabrication/packaging/déploiement/exploitation) est dans `../tool/`.
 
-
 > Vue de lecture, tenue à jour au fil de l'eau. **Les numéros sont des identifiants, pas un ordre de
 > lecture** : cet index donne l'ordre logique et les liens. À vérifier contre le dépôt git (source de
 > vérité). Statuts : **P** = Proposé, **D** = Différé.
@@ -72,6 +71,41 @@ Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** 
   entité). Assure la **stabilité/canonicité** des fichiers JSON (tool-0001) et sert de **défaut** aux
   usages (formulaire, liste, API). Surcharge par vue : réservée. → à porter dans l'ADR métamodèle /
   le méta-métamodèle.
+
+## Revue du 2026-09-26 — trous et vices cachés identifiés
+
+**À traiter pour le MVP (avant la première génération) :**
+- **Contrat de déclaration du métamodèle** (le trou central, annoncé par l'ADR-0003) : propriétés
+  d'une entité et d'un attribut, **types d'attributs**, **contraintes** (longueur, bornes, précision
+  décimale, **unicité** — y compris face à la suppression logique `actif`), **valeurs par défaut**,
+  héritage, configuration des capacités. Débouche sur le méta-métamodèle v0.
+- **Langage de conditions déclaratives** commun (effets, conditionnement de listes, filtres de
+  rapports, RLS) : opérateurs, ET/OU, référence à l'utilisateur et à l'état. Et son emplacement dans
+  l'arborescence (aucun fichier de règles prévu par tool-0003).
+- **Évolution du schéma projet** quand le métamodèle change (ajout, retrait, changement de type sur
+  une table peuplée) + **recalcul en masse** des attributs calculés matérialisés quand leur script
+  change.
+- **Navigation** : menus, page d'accueil, regroupement des entités en domaines ; comportement des
+  listes (pagination, tri, filtres, recherche).
+- **Droits et affichage indirect** : l'historique (ADR-0027) et le display value d'une référence
+  (ADR-0030/0032) ne doivent pas montrer ce que le lecteur n'a pas le droit de lire (axe structurel
+  et RLS). Objets `actif=faux` dans l'autocomplétion d'un champ Référence.
+- **Sécurité de base** : nettoyage du texte riche côté serveur (XSS stocké), limites de temps et de
+  mémoire des scripts (ADR-0031), secrets injectés à l'exécution (jamais dans l'image ni dans git),
+  pas de mot de passe administrateur par défaut.
+- **Authentification concrète du MVP** (ADR-0010) : gestion des comptes, hachage des mots de passe,
+  expiration de session.
+- **Fuseau horaire** des dates/heures (stockage UTC, affichage selon l'utilisateur) — absent de
+  l'ADR-0017. **Recherche insensible aux accents** pour l'autocomplétion.
+
+**Post-MVP, avec précaution immédiate :**
+- **Données personnelles (RGPD)** : effacement face à la suppression logique et à l'historique en
+  ajout seul. Précaution dès maintenant : ne jamais recopier de nom dans l'historique, l'audit ou
+  les logs (stocker des `sys_id`, résoudre à la lecture — déjà le choix de l'ADR-0027).
+- **Accessibilité** (RGAA, WCAG) : critère de choix des bibliothèques de composants dès la phase
+  technique.
+- **Exemples de domaine** dans les ADR (`serveur`, `ticket`, `u_task`…) : les marquer comme
+  illustrations, pour qu'ils ne fuient pas dans le code du cœur (Principe IV).
 
 ## Dettes — ADR à écrire (référencés, non rédigés)
 **Structurants / prioritaires :**

@@ -2,7 +2,6 @@
 
 **Statut :** Différé (non traité en v1) — 2026-07-11
 **Portée :** décision du **cœur** (Fabrica). Identifie et borne le sujet ; ne le tranche pas.
-À éclater en `contracts/adr/0021-reclassification.md`.
 
 ---
 

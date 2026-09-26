@@ -21,7 +21,7 @@ stockage — fondateurs, versionnés, contractuels.
 3. **Test** — Fabrica pose et exécute les tests qu'elle **sait** définir (invariants du généré) ; les
    tests *projet* (logique custom) sont **hors MVP**. **MVP (minimal).**
 4. **Packaging** — produire l'artefact déployable (image, ADR Produit-0013) ; c'est ici que les
-   **dettes de migration** bloquent si non traitées (ADR tool à venir). **MVP.**
+   **dettes de migration** bloquent si non traitées (tool-0002). **MVP.**
 5. **Déploiement** — déployer sur une instance. **MVP.**
 6. **Exécution (RUN)** — l'application tourne. **MVP.**
 7. **Exploitation avancée** (sauvegarde, clonage d'environnement, montée de version à chaud, haute
@@ -99,7 +99,7 @@ qui sert la robustesse (fil de l'eau), le merge et la lisibilité.
 **compatibilité ascendante** (ajout de champ optionnel = additif ; passage obligatoire ou retrait =
 migration). La **politique de montée de version du format** (quand un champ peut devenir obligatoire ;
 échec de l'application du patch **en environnement de dev, avant packaging**, si le champ n'est pas
-rempli partout) relève de l'**ADR dettes de migration** (tool à venir), pas d'ici.
+rempli partout) relève de la **revue de montée de version** (tool-0002), pas d'ici.
 
 ## Décision — diff sémantique (confort de lecture)
 
@@ -110,8 +110,7 @@ du diff sémantique.
 
 ## Hors périmètre (renvois / dettes — famille tool)
 
-- **Dettes de migration / gate de packaging** (dont la politique de montée de version du format ;
-  tableau de bord de dettes plutôt qu'un wizard ; blocage du passage en RUN tant que non traité).
+- **Dettes de migration / gate de packaging** : traité par **tool-0002** (revue de montée de version).
 - **Développement concurrent** complet (résolution assistée de conflits) ; **affichage des écarts**
   entre versions/branches/tags (use cases de gestion de conf).
 - **Droits dans l'outil de développement** : *second* système d'autorisation (qui peut modifier le
