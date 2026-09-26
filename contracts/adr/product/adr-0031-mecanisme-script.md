@@ -3,7 +3,7 @@
 **Statut :** Proposé — 2026-07-11
 **Famille :** **Produit** (`product/`). **Noyau** du mécanisme d'exécution des scripts projet — sujet
 fondateur destiné à **s'enrichir progressivement** (ce noyau MVP couvre le strict nécessaire).
-Générique (Principe IV). **Versant tool :** mise à disposition / compilation du code projet (dette).
+Générique (Principe IV). **Versant tool :** mise à disposition / compilation du code projet — **tool-0003**.
 
 ---
 
@@ -50,7 +50,7 @@ confluent (accès base, intégrations, conformité avancée restent hors MVP).
 
 - **Mise à disposition / compilation du code projet** (comment le dev livre sa librairie TypeScript,
   compilée, embarquée dans l'image ; conformité ; complétude — tout point d'entrée déclaré est
-  implémenté) : **versant tool**, dette — lien bidirectionnel.
+  implémenté) : **versant tool**, **tool-0003** — lien bidirectionnel.
 - **Accès base depuis un script**, **intégrations / services externes** (avec accès au monde,
   variables d'environnement…), **autres types de contexte**, **messages traduits** (clés + params),
   **retour non-texte**, **organisation multi-fichiers** : le reste du **confluent**, post-MVP.

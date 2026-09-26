@@ -40,7 +40,7 @@
 ## Règles, effets, comportements
 - **0003** (P) Contrat d'IHM piloté par le métamodèle (formulaires/listes). ↔ tool: éditeur de vues (dette)
 - **0030** (P) Rendu de l'IHM : interprète dynamique React/TS, catalogue de composants. ↔ tool: éditeur de vues (dette)
-- **0031** (P) Mécanisme de script : contexte (objet courant), sandbox pur, contrat. ↔ tool: mise à disposition du code (dette)
+- **0031** (P) Mécanisme de script : contexte (objet courant), sandbox pur, contrat. ↔ tool-0003 (mise à disposition du code)
 - **0032** (P) Attributs calculés & valeur d'affichage (display value) — 1er client de 0031.
 - **0033** (P) Numérotation : capacité `numérotée`, identifiant fonctionnel `number` (6 chiffres).
 - **0034** (P) Forme des URLs : `/{code_entité}/{sys_id}` au MVP (numéro réservé).
@@ -77,6 +77,7 @@ Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** 
 - **Points d'entrée / scripts** (confluent — à traiter en dernier).
 
 **Autres :**
+- Extension des entités Fabrica par le projet (attributs ajoutés aux tables système, avec vues/formulaires/effets associés).
 - Reporting (tableaux de bord, analyses, alertes) — gros sujet distinct, second temps.
 - Dettes de migration / gate de packaging (décisions projet exigées à la montée de version Fabrica).
 - Comment un projet définit son usage de Fabrica dans toutes ses phases (dev, run, packaging, déploiement, sauvegarde, clonage) — outillage.

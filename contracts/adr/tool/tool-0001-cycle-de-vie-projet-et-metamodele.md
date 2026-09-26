@@ -72,8 +72,9 @@ Fabrica** (pas `u_`, réservé aux entités **projet**). *(Une v0 du méta-méta
 
 ## Décision — format des fichiers de métamodèle
 
-Le métamodèle est une **arborescence de fichiers JSON** (pas un fichier) : **un fichier par entité**,
-un par liste, etc. — découpage qui sert la robustesse (fil de l'eau), le merge et la lisibilité.
+Le métamodèle est une **arborescence de fichiers JSON** (pas un fichier) : **un répertoire par entité**
+(définition, vues, listes de valeurs, scripts… — arborescence détaillée dans **tool-0003**) — découpage
+qui sert la robustesse (fil de l'eau), le merge et la lisibilité.
 
 **Propriétés fondatrices (dans cet ADR, ne bougent pas) :**
 - **JSON**, formaté **canoniquement, une propriété par ligne**, **ordre des propriétés déterministe**,
