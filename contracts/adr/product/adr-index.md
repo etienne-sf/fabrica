@@ -14,6 +14,7 @@
 - **0001** (P) Nature du projet : produit-socle réutilisable, banc de validation EA.
 - **0002** (P) Extraction du cœur en paquet versionné, fenêtre de régénération.
 - **0013** (P) Anatomie de Fabrica et ligne de propriété (Fabrica / projet / instance).
+- **0036** (P) Make or buy : construire Fabrica plutôt qu'adopter Frappe ou un autre framework (Frappe reste l'alternative de référence).
 
 ## Persistance & structure de données
 - **0004** (P) PostgreSQL.
@@ -61,7 +62,7 @@
 
 ## Numéros
 - **0015** a d'abord porté « effets multi-canaux », déplacé vers **0006** ; réattribué au moteur de règles.
-- Pas de trou ; **0036** est le prochain libre.
+- Pas de trou ; **0037** est le prochain libre.
 
 ## Catalogues (contracts/catalogues/)
 Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** (ADR-0025), **catalogue-effets.md** (ADR-0006), **catalogue-natures-acl.md** (ADR-0012), **catalogue-canaux.md** (ADR-0006). Motif : constitution § Catalogues.
