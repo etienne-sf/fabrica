@@ -3,19 +3,22 @@
 > Registre des composants de rendu. Mécanisme et définitions : **ADR product-0030**. Catalogue
 > **fermé**, enrichi par Fabrica. Chaque composant respecte un **contrat d'interface** (reçoit
 > valeur + état d'effets + locale ; rend ; déclare les types d'attributs qu'il gère) — ce qui
-> prépare les **plugins projet** (réservés). Un attribut désigne son composant (défaut par type ;
-> choix nécessaire pour les variantes).
+> prépare les **plugins projet** (réservés). Le composant se déduit du type et du
+> sous-type de l'attribut (ADR-0037) ; la surcharge dans une vue est post-MVP.
 
-| Type d'attribut | Composant(s) — édition | Cellule liste |
+| Type / sous-type | Composant — édition | Cellule liste |
 |---|---|---|
-| chaîne mono-ligne | champ texte | texte tronqué |
-| chaîne multi-ligne brute | zone de texte | texte tronqué |
-| chaîne multi-ligne riche | éditeur riche | rendu tronqué |
-| nombre | champ numérique (localisé) | nombre formaté, aligné droite |
-| booléen | case à cocher / interrupteur | oui-non / icône |
-| date / heure | sélecteur de date (localisé) | date formatée (localisée) |
-| liste de valeurs | liste déroulante (options actives, labels traduits, filtrées si conditionnée) | label traduit |
-| référence (objet) | autocomplétion display value + ouverture liste cible | display value |
+| `text/line` | champ texte | texte tronqué |
+| `text/multiline` | zone de texte | texte tronqué |
+| `text/rich` | éditeur riche | rendu tronqué |
+| `number/integer` | champ numérique (localisé) | nombre formaté, aligné à droite |
+| `number/decimal` | champ numérique (localisé, échelle) | nombre formaté, aligné à droite |
+| `boolean` | case à cocher | oui-non / icône |
+| `temporal/date` | sélecteur de date (localisé) | date formatée |
+| `temporal/time` | sélecteur d'heure (localisé) | heure formatée |
+| `temporal/datetime` | sélecteur date-heure (fuseau de l'utilisateur) | date-heure formatée |
+| `valuelist` | liste déroulante (options actives, labels traduits, filtrées si conditionnée) | label traduit |
+| `reference` | autocomplétion sur la valeur d'affichage + ouverture de la liste cible | valeur d'affichage (objet restreint si non accessible) |
 
 > **Réservés (post-MVP)** : plugins de composants projet ; valeurs récentes d'un champ référence ;
 > perso des colonnes de liste.

@@ -1,0 +1,4 @@
+# Fins de ligne normalisées en LF (diffs propres, cohérent avec la canonicité — tool-0001)
+* text=auto eol=lf
+# Scripts PowerShell de Spec Kit : CRLF, attendu sous Windows
+*.ps1 text eol=crlf

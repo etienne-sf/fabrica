@@ -41,10 +41,13 @@ généré à l'infini. Cohérent aussi avec le métamodèle réflexif (ADR-0019)
   types d'attributs il sait rendre. Ce contrat est la **frontière calée** qui rendra l'ouverture
   future aux **plugins de composants projet** simple (un plugin = une entrée respectant le contrat —
   post-MVP, priorité faible ; un plugin de composant sera un cas des points d'entrée).
-- **Un attribut désigne son composant** parmi le catalogue (**défaut sensé par type** si non
-  précisé ; le choix est **nécessaire dès le MVP** pour départager les variantes d'un même type —
-  ex. chaîne mono-ligne / multi-ligne / riche). Les **plugins externes** (hors catalogue) sont
-  **réservés**.
+- **Le composant se déduit du type et du sous-type** de l'attribut (ADR-0037) : les variantes d'un
+  même type (texte mono-ligne, multi-ligne, riche) sont des sous-types, pas des choix de composant.
+  Choisir un autre affichage est une propriété de la **vue** (surcharge dans la définition du
+  formulaire, **post-MVP**). Les **plugins externes** (hors catalogue) sont **réservés**.
+- L'interprète ne demande **que les attributs que l'utilisateur peut lire** : il construit ses requêtes
+  à partir du métamodèle filtré par les droits effectifs (une requête sur un attribut non lisible est
+  rejetée, ADR-0037).
 
 ## Décision — mapping type d'attribut → composant
 

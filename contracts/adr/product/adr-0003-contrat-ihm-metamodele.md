@@ -2,7 +2,7 @@
 
 **Statut :** Proposé — 2026-07-11
 
-> **Mise à jour du 2026-09-26 (nettoyage).** Cet ADR décrit la **cible** du contrat d'IHM. Le **MVP** en retient un sous-ensemble défini par l'**ADR-0030** (rendu) : colonnes de liste = définition projet ; les **préférences utilisateur** (colonnes choisies, ordre), `colonnes_verrouillees`, `max_colonnes` sont **post-MVP**. Le « contrat de déclaration du métamodèle » annoncé plus bas **reste à écrire**. Le « rendu régénérable » s'entend désormais comme l'**interprète dynamique** de l'ADR-0030.
+> **Mise à jour du 2026-09-26 (nettoyage).** Cet ADR décrit la **cible** du contrat d'IHM. Le **MVP** en retient un sous-ensemble défini par l'**ADR-0030** (rendu) : colonnes de liste = définition projet ; les **préférences utilisateur** (colonnes choisies, ordre), `colonnes_verrouillees`, `max_colonnes` sont **post-MVP**. Le « contrat de déclaration du métamodèle » annoncé plus bas est l'**ADR-0037**. Le « rendu régénérable » s'entend désormais comme l'**interprète dynamique** de l'ADR-0030.
 
 ## Contexte
 Les écrans d'édition (formulaires) et de consultation (listes) doivent être dérivés du métamodèle plutôt que codés à la main par entité, tout en permettant une personnalisation utilisateur. Il fallait décider où vit chaque responsabilité pour ne pas laisser du paramétrage fuir dans du code régénérable, ni figer du rendu qui doit rester jetable.
@@ -36,5 +36,5 @@ validation et la même autorisation que le formulaire — cf. constitution (« P
 - *Liste `colonnes_disponibles` re-déclarée par vue* : deux listes à maintenir qui divergent. Remplacée par la dérivation depuis `listable`.
 
 ## Conséquences
-- Le métamodèle doit porter, par attribut, au moins : type, contraintes, droits (ADR-0012), `label`, `listable` ; et par vue : structure de formulaire, `colonnes_defaut`, bornes de personnalisation. Ceci alourdit le contrat central (cf. ADR « Contrat de déclaration du métamodèle » [à écrire — trou central de la revue du 2026-09-26]).
+- Le métamodèle doit porter, par attribut, au moins : type, contraintes, droits (ADR-0012), `label`, `listable` ; et par vue : structure de formulaire, `colonnes_defaut`, bornes de personnalisation. Ceci alourdit le contrat central (cf. **ADR-0037**, contrat de déclaration du métamodèle).
 - **Point de perf reporté** : une colonne personnalisée pointant vers un attribut d'entité liée (ex. « nom du propriétaire ») retombe sur le pushdown / anti-N+1 ; la personnalisation est un générateur de requêtes dynamiques, à traiter comme tel à l'implémentation.

@@ -58,6 +58,7 @@ largement l'**arborescence du dépôt projet** qui héberge métamodèle, script
 │       ├── list-views/default.json
 │       ├── value-lists/status.json   # liste qualifiant u_task.status
 │       ├── lifecycle.json        # si capacité à-états
+│       ├── effects.json          # effets et leurs conditions (ADR-0006, ADR-0037)
 │       ├── acl.json              # droits portant sur cette entité
 │       ├── scripts/display_value.ts  # un fichier par point d'entrée
 │       └── i18n/{en,fr}.json     # libellés entity:/list: de cette entité

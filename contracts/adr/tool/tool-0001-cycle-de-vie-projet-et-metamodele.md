@@ -83,9 +83,10 @@ qui sert la robustesse (fil de l'eau), le merge et la lisibilité.
   même ligne). C'est **la merge-abilité** — exigence-mère (fusion transparente de plusieurs
   développeurs) — qui commande ce choix, pas la seule lisibilité.
 - **Idempotence** : `lire(écrire(m)) == m` ; même sémantique ⇒ **mêmes octets** (pas de faux diff).
-- **Identité stable des éléments** : chaque élément de métamodèle (entité, attribut, règle) porte un
-  **identifiant stable** — pas sa position ni son nom (qui peut changer). Sans quoi « renommer »
-  apparaît comme « supprimer + ajouter », et deux renommages concurrents deviennent ingérables.
+- **Identité stable des éléments** : l'identité d'un élément n'est ni sa position ni son libellé
+  (qui change librement). C'est son **code**, **immuable dès qu'il est commité** (renommable avant, par
+  un refactoring de Fabrica) ; pour un attribut, le couple (code entité, code attribut) — ADR-0037.
+  Sans identité stable, « renommer » apparaîtrait comme « supprimer + ajouter ».
 - **Validation post-merge** : après tout merge git, Fabrica **re-valide la cohérence** du métamodèle
   fusionné avant de l'accepter — un merge textuel réussi peut produire un métamodèle invalide.
 

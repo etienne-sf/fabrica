@@ -39,7 +39,9 @@ structurel ET de l'axe ligne — jamais l'union. L'axe ligne ne peut que *restre
   - **opération** : `lire | écrire | supprimer` (échelle). **Pas d'opération « filtrer »** :
     filtrer/trier **découle de lire** (on ne peut filtrer que ce qu'on peut lire). Une définition
     (rapport, vue, filtre) qui violerait ce droit est détectée **au plus tôt**, et à défaut
-    **refusée à l'exécution** avec une erreur claire. *(À la différence des modèles où le contrôle
+    **refusée à l'exécution** avec une erreur claire. Une requête qui lit, filtre ou trie un attribut
+    non lisible est **rejetée entière, à l'analyse** : aucune valeur n'est jamais remplacée par nul
+    (ADR-0037). *(À la différence des modèles où le contrôle
     d'attribut agit en bout de chaîne sur l'affichage — laissant filtrer avant de masquer, d'où
     l'inférence par requête — le contrôle est ici en base, à la source : filtrer sur un attribut
     non lisible est refusé, pas exécuté puis masqué.)*
