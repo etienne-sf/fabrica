@@ -15,6 +15,7 @@
 - **0002** (P) Extraction du cœur en paquet versionné, fenêtre de régénération.
 - **0013** (P) Anatomie de Fabrica et ligne de propriété (Fabrica / projet / instance).
 - **0036** (P) Make or buy : construire Fabrica plutôt qu'adopter Frappe ou un autre framework (Frappe reste l'alternative de référence).
+- **0037** (P) Contrat de déclaration du métamodèle : identité par le code, propriétés d'entité et d'attribut, types et sous-types, scalaires, unicité, droits et nullité.
 
 ## Persistance & structure de données
 - **0004** (P) PostgreSQL.
@@ -62,7 +63,7 @@
 
 ## Numéros
 - **0015** a d'abord porté « effets multi-canaux », déplacé vers **0006** ; réattribué au moteur de règles.
-- Pas de trou ; **0037** est le prochain libre.
+- Pas de trou ; **0038** est le prochain libre.
 
 ## Catalogues (contracts/catalogues/)
 Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** (ADR-0025), **catalogue-effets.md** (ADR-0006), **catalogue-natures-acl.md** (ADR-0012), **catalogue-canaux.md** (ADR-0006). Motif : constitution § Catalogues.
@@ -76,11 +77,11 @@ Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** 
 ## Revue du 2026-09-26 — trous et vices cachés identifiés
 
 **À traiter pour le MVP (avant la première génération) :**
-- **Contrat de déclaration du métamodèle** (le trou central, annoncé par l'ADR-0003) : propriétés
+- ✅ **Contrat de déclaration du métamodèle** — traité par l'**ADR-0037** (le trou central, annoncé par l'ADR-0003) : propriétés
   d'une entité et d'un attribut, **types d'attributs**, **contraintes** (longueur, bornes, précision
   décimale, **unicité** — y compris face à la suppression logique `actif`), **valeurs par défaut**,
   héritage, configuration des capacités. Débouche sur le méta-métamodèle v0.
-- **Langage de conditions déclaratives** commun (effets, conditionnement de listes, filtres de
+- **Langage de conditions déclaratives** commun (ADR dédié à venir, après étude des alternatives ; emplacement `effects.json` fixé par l'ADR-0037) (effets, conditionnement de listes, filtres de
   rapports, RLS) : opérateurs, ET/OU, référence à l'utilisateur et à l'état. Et son emplacement dans
   l'arborescence (aucun fichier de règles prévu par tool-0003).
 - **Évolution du schéma projet** quand le métamodèle change (ajout, retrait, changement de type sur
@@ -88,7 +89,7 @@ Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** 
   change.
 - **Navigation** : menus, page d'accueil, regroupement des entités en domaines ; comportement des
   listes (pagination, tri, filtres, recherche).
-- **Droits et affichage indirect** : l'historique (ADR-0027) et le display value d'une référence
+- ✅ (en partie, ADR-0037 : objet restreint, erreur plutôt que nul) **Droits et affichage indirect** : l'historique (ADR-0027) et le display value d'une référence
   (ADR-0030/0032) ne doivent pas montrer ce que le lecteur n'a pas le droit de lire (axe structurel
   et RLS). Objets `actif=faux` dans l'autocomplétion d'un champ Référence.
 - **Sécurité de base** : nettoyage du texte riche côté serveur (XSS stocké), limites de temps et de
@@ -96,7 +97,7 @@ Registres des familles fermées, renvoyant aux ADR : **catalogue-capacites.md** 
   pas de mot de passe administrateur par défaut.
 - **Authentification concrète du MVP** (ADR-0010) : gestion des comptes, hachage des mots de passe,
   expiration de session.
-- **Fuseau horaire** des dates/heures (stockage UTC, affichage selon l'utilisateur) — absent de
+- ✅ (fuseau : ADR-0037) **Fuseau horaire** des dates/heures (stockage UTC, affichage selon l'utilisateur) — absent de
   l'ADR-0017. **Recherche insensible aux accents** pour l'autocomplétion.
 
 **Post-MVP, avec précaution immédiate :**

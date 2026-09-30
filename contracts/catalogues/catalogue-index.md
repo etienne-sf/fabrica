@@ -15,6 +15,7 @@
 | `catalogue-conditions-ligne.md` | Conditions de l'axe ligne (valeur, relation-utilisateur) + axes de gouvernance (utilisateur, groupe) | **ADR-0026** |
 | `catalogue-composants.md` | Composants de rendu IHM (mapping type d'attribut → composant) | **ADR-0030** |
 | `catalogue-rapports.md` | Mesures (comptage, somme, moyenne) et visualisations (tableau, barres, camembert) du reporting v1 | **ADR-0035** |
+| `catalogue-types.md` | Types et sous-types d'attributs (JSON, scalaires GraphQL, spécifications), formats de chaîne, valeurs par défaut dynamiques | **ADR-0037** |
 
 ## Règle commune (constitution § Catalogues)
 - **Fermé** : le projet **active/référence**, il n'**invente** pas. Extensible **par Fabrica**.
